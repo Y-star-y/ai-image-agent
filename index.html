@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Image Agent</title>
+    <link rel="stylesheet" href="./styles.css?v=reference-only-20260629-1" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="control-bar" aria-label="生成参数">
+        <div class="brand-block">
+          <div class="brand-mark">AI</div>
+          <div>
+            <h1>AI AGENT</h1>
+            <p class="brand-kicker">IMAGE OPS</p>
+          </div>
+        </div>
+
+        <div class="upload-strip" aria-label="图片上传">
+          <label class="upload-card" data-slot="front">
+            <input type="file" accept="image/*" data-upload="front" />
+            <span class="slot-title">商品正面</span>
+            <span class="slot-note">必传</span>
+            <img alt="" data-preview="front" />
+          </label>
+
+          <label class="upload-card" data-slot="back">
+            <input type="file" accept="image/*" data-upload="back" />
+            <span class="slot-title">商品反面</span>
+            <span class="slot-note">可选</span>
+            <img alt="" data-preview="back" />
+          </label>
+
+          <label class="upload-card" data-slot="side">
+            <input type="file" accept="image/*" data-upload="side" />
+            <span class="slot-title">侧面/细节</span>
+            <span class="slot-note">可选</span>
+            <img alt="" data-preview="side" />
+          </label>
+
+          <label class="upload-card face-card" data-slot="face">
+            <input type="file" accept="image/*" data-upload="face" />
+            <span class="slot-title">模特</span>
+            <span class="slot-note">必传</span>
+            <img alt="" data-preview="face" />
+          </label>
+        </div>
+
+        <form class="prompt-form" id="promptForm">
+          <div class="generate-controls">
+            <button class="generate-button" type="submit">生成</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="result-panel" aria-label="生成结果">
+        <header class="result-header">
+          <div>
+            <h2>AI 套图矩阵</h2>
+            <p id="statusText">等待上传商品图和模特</p>
+          </div>
+          <button class="export-button" type="button" id="exportSet" disabled>下载导出</button>
+        </header>
+
+        <div class="workflow-log" id="workflowLog" aria-label="AI 执行记录"></div>
+
+        <div class="result-strip" id="resultStrip">
+          <article class="image-card" data-kind="模特正面">
+            <div class="image-stage"><span>模特正面</span></div>
+            <footer><strong>01</strong><span class="image-meta">等待生成</span></footer>
+          </article>
+          <article class="image-card" data-kind="模特侧身">
+            <div class="image-stage"><span>模特侧身</span></div>
+            <footer><strong>02</strong><span class="image-meta">等待生成</span></footer>
+          </article>
+          <article class="image-card" data-kind="生活场景">
+            <div class="image-stage"><span>生活场景</span></div>
+            <footer><strong>03</strong><span class="image-meta">等待生成</span></footer>
+          </article>
+          <article class="image-card" data-kind="氛围场景">
+            <div class="image-stage"><span>氛围场景</span></div>
+            <footer><strong>04</strong><span class="image-meta">等待生成</span></footer>
+          </article>
+          <article class="image-card" data-kind="商品细节">
+            <div class="image-stage"><span>商品细节</span></div>
+            <footer><strong>05</strong><span class="image-meta">等待生成</span></footer>
+          </article>
+          <article class="image-card" data-kind="种草封面">
+            <div class="image-stage"><span>种草封面</span></div>
+            <footer><strong>06</strong><span class="image-meta">等待生成</span></footer>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="previewDialog">
+      <button type="button" class="dialog-close" id="closePreview">关闭</button>
+      <img alt="放大预览" id="previewImage" />
+    </dialog>
+
+    <script src="./app.js?v=reference-only-20260629-1"></script>
+  </body>
+</html>

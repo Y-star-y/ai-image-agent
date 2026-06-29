@@ -1,0 +1,1339 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-28T13:19:59.192Z",
+  "items": [
+    {
+      "sceneCategory": "window garden soft side light",
+      "sceneKeywords": [
+        "open window",
+        "garden outside",
+        "white wall",
+        "side light",
+        "quiet resort room"
+      ],
+      "props": [],
+      "pose": "side glance by window",
+      "bodyOrientation": "side/front standing looking away",
+      "handPlacement": "both hands relaxed along body",
+      "legPose": "standing long-leg line",
+      "propInteraction": "none",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "front",
+        "atmosphere"
+      ],
+      "lighting": "soft window sunlight with garden shadow",
+      "camera": "vertical mid body crop",
+      "composition": "window frame and garden depth",
+      "mood": "quiet refined resort detail",
+      "colorTone": "soft white and garden green",
+      "id": "style-eae9e3e3e71d0391",
+      "filename": "style-eae9e3e3e71d0391-详情-27.jpg",
+      "sourceName": "详情-27.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/详情-27.jpg",
+      "createdAt": "2026-06-28T11:49:02.890Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "详情-27.jpg: learn window garden soft side light; action=side glance by window; hands=both hands relaxed along body; legs=standing long-leg line; slots=front/atmosphere"
+    },
+    {
+      "sceneCategory": "colorful beach club lounger area",
+      "sceneKeywords": [
+        "colorful kiosk",
+        "pool loungers",
+        "yellow umbrella",
+        "waterpark",
+        "cloudy sky"
+      ],
+      "props": [
+        "sunglasses on head"
+      ],
+      "pose": "kneel on lounge chair with hand behind head",
+      "bodyOrientation": "side kneeling three-quarter",
+      "handPlacement": "one hand behind head, one arm relaxed",
+      "legPose": "kneeling lounge-chair pose with extended lower leg",
+      "propInteraction": "sunglasses styling",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "cover",
+        "atmosphere"
+      ],
+      "lighting": "soft overcast beach club light",
+      "camera": "vertical kneeling full-body crop",
+      "composition": "lounger diagonal with colorful kiosk background",
+      "mood": "playful beach club cover",
+      "colorTone": "bright yellow and turquoise accents",
+      "id": "style-a3255be02ab8ef6c",
+      "filename": "style-a3255be02ab8ef6c-详情-23.jpg",
+      "sourceName": "详情-23.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/详情-23.jpg",
+      "createdAt": "2026-06-28T11:49:02.890Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "详情-23.jpg: learn colorful beach club lounger area; action=kneel on lounge chair with hand behind head; hands=one hand behind head, one arm relaxed; legs=kneeling lounge-chair pose with extended lower leg; slots=cover/atmosphere"
+    },
+    {
+      "sceneCategory": "tropical wooden deck seated",
+      "sceneKeywords": [
+        "palm leaves",
+        "wood deck",
+        "coconut on table",
+        "woven basket",
+        "shade"
+      ],
+      "props": [
+        "coconut",
+        "woven basket"
+      ],
+      "pose": "seated on wooden deck leaning one arm",
+      "bodyOrientation": "front seated three-quarter",
+      "handPlacement": "one hand rests on bench/rail, other reaches toward basket or table",
+      "legPose": "seated crossed or bent legs",
+      "propInteraction": "near coconut and woven basket",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "atmosphere",
+        "cover"
+      ],
+      "lighting": "dappled tropical shade",
+      "camera": "vertical seated crop",
+      "composition": "leaf shadows and wooden texture around subject",
+      "mood": "soft tropical balcony diary",
+      "colorTone": "green palms and warm wood",
+      "id": "style-4bb7bb3cd13744ac",
+      "filename": "style-4bb7bb3cd13744ac-详情-13.jpg",
+      "sourceName": "详情-13.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/详情-13.jpg",
+      "createdAt": "2026-06-28T11:49:02.889Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "详情-13.jpg: learn tropical wooden deck seated; action=seated on wooden deck leaning one arm; hands=one hand rests on bench/rail, other reaches toward basket or table; legs=seated crossed or bent legs; slots=atmosphere/cover"
+    },
+    {
+      "sceneCategory": "palm shade beach coconut",
+      "sceneKeywords": [
+        "palm tree",
+        "sand",
+        "lounge chairs",
+        "coconut drink",
+        "dappled sun"
+      ],
+      "props": [
+        "coconut drink"
+      ],
+      "pose": "hold coconut under palm shade",
+      "bodyOrientation": "front standing relaxed",
+      "handPlacement": "one hand holds coconut, other hand on waist/relaxed",
+      "legPose": "standing with casual hip shift",
+      "propInteraction": "hold coconut drink",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "lifestyle",
+        "cover"
+      ],
+      "lighting": "warm dappled palm shade",
+      "camera": "vertical knee-up social crop",
+      "composition": "palm trunk behind subject, lounge chairs in depth",
+      "mood": "real beach vacation snack moment",
+      "colorTone": "warm sand and green palm",
+      "id": "style-19cd638a1482bcaf",
+      "filename": "style-19cd638a1482bcaf-详情-09.jpg",
+      "sourceName": "详情-09.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/详情-09.jpg",
+      "createdAt": "2026-06-28T11:49:02.889Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "详情-09.jpg: learn palm shade beach coconut; action=hold coconut under palm shade; hands=one hand holds coconut, other hand on waist/relaxed; legs=standing with casual hip shift; slots=lifestyle/cover"
+    },
+    {
+      "sceneCategory": "minimal mirror selfie with resort bag",
+      "sceneKeywords": [
+        "mirror selfie",
+        "minimal wall",
+        "straw bag",
+        "soft indoor light"
+      ],
+      "props": [
+        "phone",
+        "straw bag"
+      ],
+      "pose": "mirror selfie with bag",
+      "bodyOrientation": "front mirror selfie",
+      "handPlacement": "one hand holds phone covering face, other hand on waist or holding bag",
+      "legPose": "standing with one hip shifted",
+      "propInteraction": "phone mirror selfie and straw bag",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "cover"
+      ],
+      "lighting": "soft indoor ambient light",
+      "camera": "phone mirror crop",
+      "composition": "simple wall, phone centered, bag on side",
+      "mood": "user-generated fit check",
+      "colorTone": "warm neutral indoor",
+      "id": "style-5ebd3ff5c12e3c59",
+      "filename": "style-5ebd3ff5c12e3c59-详情-04.jpg",
+      "sourceName": "详情-04.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/详情-04.jpg",
+      "createdAt": "2026-06-28T11:49:02.888Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "详情-04.jpg: learn minimal mirror selfie with resort bag; action=mirror selfie with bag; hands=one hand holds phone covering face, other hand on waist or holding bag; legs=standing with one hip shifted; slots=cover"
+    },
+    {
+      "sceneCategory": "beach chair golden hour lounge",
+      "sceneKeywords": [
+        "beach chair",
+        "white cushion",
+        "sand beach",
+        "palm",
+        "golden hour"
+      ],
+      "props": [
+        "beach chair",
+        "canvas tote"
+      ],
+      "pose": "seated cross-leg lounge pose",
+      "bodyOrientation": "front seated slightly reclined",
+      "handPlacement": "one hand on cushion/chair, one hand relaxed",
+      "legPose": "crossed legs extended on lounge chair",
+      "propInteraction": "lean on chair cushion",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "atmosphere",
+        "cover"
+      ],
+      "lighting": "warm low-angle beach light",
+      "camera": "vertical seated full-body crop",
+      "composition": "diagonal chair and long legs dominate foreground",
+      "mood": "lazy beach afternoon editorial",
+      "colorTone": "warm sand and soft sky",
+      "id": "style-d95800d9d7012116",
+      "filename": "style-d95800d9d7012116-详情-03.jpg",
+      "sourceName": "详情-03.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/详情-03.jpg",
+      "createdAt": "2026-06-28T11:49:02.888Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "详情-03.jpg: learn beach chair golden hour lounge; action=seated cross-leg lounge pose; hands=one hand on cushion/chair, one hand relaxed; legs=crossed legs extended on lounge chair; slots=atmosphere/cover"
+    },
+    {
+      "sceneCategory": "villa veranda garden selfie",
+      "sceneKeywords": [
+        "villa veranda",
+        "garden path",
+        "black wood wall",
+        "round mirror",
+        "rattan bag"
+      ],
+      "props": [
+        "phone",
+        "rattan bag"
+      ],
+      "pose": "outdoor mirror selfie with rattan bag",
+      "bodyOrientation": "front mirror/selfie crop",
+      "handPlacement": "one hand holds phone, one arm carries rattan bag",
+      "legPose": "standing close crop with hip shift",
+      "propInteraction": "phone selfie and oversized rattan bag",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "cover",
+        "lifestyle"
+      ],
+      "lighting": "bright garden daylight",
+      "camera": "close phone selfie crop",
+      "composition": "garden path and veranda behind subject",
+      "mood": "casual resort outfit selfie",
+      "colorTone": "white clothing and lush green garden",
+      "id": "style-84908807ee21d1df",
+      "filename": "style-84908807ee21d1df-主图-08.jpg",
+      "sourceName": "主图-08.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/主图-08.jpg",
+      "createdAt": "2026-06-28T11:49:02.887Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "主图-08.jpg: learn villa veranda garden selfie; action=outdoor mirror selfie with rattan bag; hands=one hand holds phone, one arm carries rattan bag; legs=standing close crop with hip shift; slots=cover/lifestyle"
+    },
+    {
+      "sceneCategory": "beach cap casual front",
+      "sceneKeywords": [
+        "beach path",
+        "green shrubs",
+        "ocean waves",
+        "baseball cap"
+      ],
+      "props": [
+        "baseball cap",
+        "canvas tote"
+      ],
+      "pose": "pointing at cheeks playful cap pose",
+      "bodyOrientation": "front standing",
+      "handPlacement": "both hands point near cheeks",
+      "legPose": "straight standing casual pose",
+      "propInteraction": "wear baseball cap and shoulder tote",
+      "garmentVisibilityRisk": "high",
+      "suitableSlots": [
+        "cover"
+      ],
+      "lighting": "hard sunny beach light",
+      "camera": "square front social crop",
+      "composition": "subject centered with beach path depth",
+      "mood": "cute playful beach diary",
+      "colorTone": "yellow-blue sporty summer",
+      "id": "style-2defafa7dd76e0ff",
+      "filename": "style-2defafa7dd76e0ff-fe981d8999aac16a3065ee0d3be3e5c6.jpg",
+      "sourceName": "fe981d8999aac16a3065ee0d3be3e5c6.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/fe981d8999aac16a3065ee0d3be3e5c6.jpg",
+      "createdAt": "2026-06-28T11:49:02.887Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "fe981d8999aac16a3065ee0d3be3e5c6.jpg: learn beach cap casual front; action=pointing at cheeks playful cap pose; hands=both hands point near cheeks; legs=straight standing casual pose; slots=cover"
+    },
+    {
+      "sceneCategory": "pool villa back view kneeling",
+      "sceneKeywords": [
+        "pool villa",
+        "cactus garden",
+        "thatched umbrella",
+        "white wall"
+      ],
+      "props": [
+        "baseball cap"
+      ],
+      "pose": "back view kneeling by pool",
+      "bodyOrientation": "back three-quarter kneeling look down",
+      "handPlacement": "one hand holds side tie, other arm relaxed",
+      "legPose": "kneeling with one knee on cushion",
+      "propInteraction": "wear cap",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "side"
+      ],
+      "lighting": "hard pool daylight",
+      "camera": "square back-view product crop",
+      "composition": "pool and white villa around subject",
+      "mood": "back detail swimwear display",
+      "colorTone": "turquoise pool and white resort",
+      "id": "style-281595999fbe1695",
+      "filename": "style-281595999fbe1695-ScreenShot_2026-06-26_133937_385.jpg",
+      "sourceName": "ScreenShot_2026-06-26_133937_385.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/ScreenShot_2026-06-26_133937_385.jpg",
+      "createdAt": "2026-06-28T11:49:02.885Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "ScreenShot_2026-06-26_133937_385.jpg: learn pool villa back view kneeling; action=back view kneeling by pool; hands=one hand holds side tie, other arm relaxed; legs=kneeling with one knee on cushion; slots=side"
+    },
+    {
+      "sceneCategory": "pool edge palm close-up",
+      "sceneKeywords": [
+        "turquoise pool",
+        "palm leaves",
+        "wet hair",
+        "stone pebbles",
+        "close crop"
+      ],
+      "props": [],
+      "pose": "seated by pool with hands together",
+      "bodyOrientation": "front seated close crop",
+      "handPlacement": "both hands together near lap",
+      "legPose": "seated pool-edge pose, legs bent",
+      "propInteraction": "none",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "atmosphere",
+        "cover"
+      ],
+      "lighting": "dappled palm sunlight over pool",
+      "camera": "close vertical upper-to-thigh crop",
+      "composition": "pool blue on one side, foliage canopy above",
+      "mood": "quiet wet-hair pool diary",
+      "colorTone": "aqua pool and green leaves",
+      "id": "style-2d0fe4c2058bc71c",
+      "filename": "style-2d0fe4c2058bc71c-ScreenShot_2026-06-26_133928_116.jpg",
+      "sourceName": "ScreenShot_2026-06-26_133928_116.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/ScreenShot_2026-06-26_133928_116.jpg",
+      "createdAt": "2026-06-28T11:49:02.885Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "ScreenShot_2026-06-26_133928_116.jpg: learn pool edge palm close-up; action=seated by pool with hands together; hands=both hands together near lap; legs=seated pool-edge pose, legs bent; slots=atmosphere/cover"
+    },
+    {
+      "sceneCategory": "thatched beach cafe front",
+      "sceneKeywords": [
+        "thatched roof",
+        "palm trees",
+        "beach sofa",
+        "wood cafe",
+        "sand"
+      ],
+      "props": [
+        "iced tea on table"
+      ],
+      "pose": "adjust shoulder straps front standing",
+      "bodyOrientation": "front standing centered",
+      "handPlacement": "both hands lightly hold shoulder straps, product front visible",
+      "legPose": "straight standing with slight hip shift",
+      "propInteraction": "no handheld prop, nearby cafe drink",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "front",
+        "cover"
+      ],
+      "lighting": "clean tropical daylight",
+      "camera": "vertical full body or thigh-up crop",
+      "composition": "subject centered against cafe hut",
+      "mood": "commercial beach cafe main image",
+      "colorTone": "green palm, warm wood, clean sand",
+      "id": "style-c0d74f53c58d274a",
+      "filename": "style-c0d74f53c58d274a-ScreenShot_2026-06-26_133654_110.png",
+      "sourceName": "ScreenShot_2026-06-26_133654_110.png",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/ScreenShot_2026-06-26_133654_110.png",
+      "createdAt": "2026-06-28T11:49:02.885Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "ScreenShot_2026-06-26_133654_110.png: learn thatched beach cafe front; action=adjust shoulder straps front standing; hands=both hands lightly hold shoulder straps, product front visible; legs=straight standing with slight hip shift; slots=front/cover"
+    },
+    {
+      "sceneCategory": "sunny beach walk with straw hat",
+      "sceneKeywords": [
+        "white sand beach",
+        "ocean horizon",
+        "striped umbrella",
+        "beach chair",
+        "sunny vacation"
+      ],
+      "props": [
+        "wide straw hat",
+        "straw tote",
+        "sunglasses"
+      ],
+      "pose": "walk forward with straw hat and tote",
+      "bodyOrientation": "front walking three-quarter",
+      "handPlacement": "one hand holds sunglasses or small prop, other hand carries tote/hat",
+      "legPose": "walking step, one leg forward",
+      "propInteraction": "wear straw hat and carry straw tote",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "lifestyle",
+        "cover"
+      ],
+      "lighting": "hard sunny beach daylight",
+      "camera": "vertical mid-to-full body social crop",
+      "composition": "subject centered with beach horizon and umbrella accents",
+      "mood": "bright cheerful beach shopping mood",
+      "colorTone": "high-key blue sea and pale sand",
+      "id": "style-df52416cdb10751c",
+      "filename": "style-df52416cdb10751c-SKU-01-卡其色.jpg",
+      "sourceName": "SKU-01-卡其色.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/SKU-01-卡其色.jpg",
+      "createdAt": "2026-06-28T11:49:02.884Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "SKU-01-卡其色.jpg: learn sunny beach walk with straw hat; action=walk forward with straw hat and tote; hands=one hand holds sunglasses or small prop, other hand carries tote/hat; legs=walking step, one leg forward; slots=lifestyle/cover"
+    },
+    {
+      "sceneCategory": "yacht net deck kneeling",
+      "sceneKeywords": [
+        "yacht net deck",
+        "ocean horizon",
+        "pillow cushions",
+        "blue sky"
+      ],
+      "props": [
+        "sunglasses",
+        "head scarf"
+      ],
+      "pose": "kneel on yacht net deck",
+      "bodyOrientation": "front kneeling three-quarter",
+      "handPlacement": "hands rest on net/pillow or hold sunglasses",
+      "legPose": "kneeling on deck cushion",
+      "propInteraction": "sunglasses and yacht cushions",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "atmosphere",
+        "cover"
+      ],
+      "lighting": "hard yacht daylight",
+      "camera": "vertical kneeling crop",
+      "composition": "low deck foreground with open sea behind",
+      "mood": "premium yacht vacation diary",
+      "colorTone": "white deck and deep blue ocean",
+      "id": "style-12b7a0fa7f21c8d4",
+      "filename": "style-12b7a0fa7f21c8d4-9e02f73332ae71012a206398ee0bbd1e.jpg",
+      "sourceName": "9e02f73332ae71012a206398ee0bbd1e.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/9e02f73332ae71012a206398ee0bbd1e.jpg",
+      "createdAt": "2026-06-28T11:49:02.884Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "9e02f73332ae71012a206398ee0bbd1e.jpg: learn yacht net deck kneeling; action=kneel on yacht net deck; hands=hands rest on net/pillow or hold sunglasses; legs=kneeling on deck cushion; slots=atmosphere/cover"
+    },
+    {
+      "sceneCategory": "flower tropical cafe entrance",
+      "sceneKeywords": [
+        "bougainvillea",
+        "wooden cafe",
+        "dark doorway",
+        "flower frame",
+        "sand floor"
+      ],
+      "props": [
+        "flower hair clip"
+      ],
+      "pose": "front standing with hand near hair",
+      "bodyOrientation": "front standing slight hip shift",
+      "handPlacement": "one hand touches hair/shoulder, other hand relaxed",
+      "legPose": "one leg forward, soft S curve",
+      "propInteraction": "flower hair clip styling",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "front",
+        "cover"
+      ],
+      "lighting": "bright dappled cafe daylight",
+      "camera": "vertical full or knee-up crop",
+      "composition": "flowers frame the upper body",
+      "mood": "sweet tropical cafe cover",
+      "colorTone": "pink flowers and warm wood",
+      "id": "style-e1fbb8e019b45378",
+      "filename": "style-e1fbb8e019b45378-8847b62c873594b83485acd52a3eec24.jpg",
+      "sourceName": "8847b62c873594b83485acd52a3eec24.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/8847b62c873594b83485acd52a3eec24.jpg",
+      "createdAt": "2026-06-28T11:49:02.883Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "8847b62c873594b83485acd52a3eec24.jpg: learn flower tropical cafe entrance; action=front standing with hand near hair; hands=one hand touches hair/shoulder, other hand relaxed; legs=one leg forward, soft S curve; slots=front/cover"
+    },
+    {
+      "sceneCategory": "minimal resort room cafe corner",
+      "sceneKeywords": [
+        "wood floor",
+        "white wall",
+        "open window",
+        "rattan bag",
+        "iced drink"
+      ],
+      "props": [
+        "rattan bag",
+        "iced drink"
+      ],
+      "pose": "lean by table with rattan bag and drink",
+      "bodyOrientation": "front three-quarter leaning",
+      "handPlacement": "one hand holds drink, one hand touches rattan bag/table",
+      "legPose": "one leg bent or lifted, playful indoor pose",
+      "propInteraction": "interact with bag and drink",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "lifestyle",
+        "cover"
+      ],
+      "lighting": "soft indoor natural window light",
+      "camera": "vertical mid body social crop",
+      "composition": "warm wooden interior with open garden window",
+      "mood": "relaxed vacation cafe room",
+      "colorTone": "warm wood and soft white",
+      "id": "style-ebc2a351888254d8",
+      "filename": "style-ebc2a351888254d8-80dd659ec27c528b2dcc07232de971ad.jpg",
+      "sourceName": "80dd659ec27c528b2dcc07232de971ad.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/80dd659ec27c528b2dcc07232de971ad.jpg",
+      "createdAt": "2026-06-28T11:49:02.883Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "80dd659ec27c528b2dcc07232de971ad.jpg: learn minimal resort room cafe corner; action=lean by table with rattan bag and drink; hands=one hand holds drink, one hand touches rattan bag/table; legs=one leg bent or lifted, playful indoor pose; slots=lifestyle/cover"
+    },
+    {
+      "sceneCategory": "ocean rocks skyline backlight",
+      "sceneKeywords": [
+        "ocean rocks",
+        "city skyline",
+        "sea sparkle",
+        "blue sky",
+        "wind"
+      ],
+      "props": [
+        "sunglasses"
+      ],
+      "pose": "cover mouth with sunglasses in wind",
+      "bodyOrientation": "front standing with slight twist",
+      "handPlacement": "one hand covers mouth while holding sunglasses, other hand relaxed",
+      "legPose": "standing long-leg line",
+      "propInteraction": "hold sunglasses near face",
+      "garmentVisibilityRisk": "high",
+      "suitableSlots": [
+        "atmosphere",
+        "cover"
+      ],
+      "lighting": "backlit hard seaside sun",
+      "camera": "vertical full body or knee-up social crop",
+      "composition": "large ocean background with subject centered",
+      "mood": "playful windy ocean diary",
+      "colorTone": "deep blue sea and bright sky",
+      "id": "style-24962facdb5c43be",
+      "filename": "style-24962facdb5c43be-7f887e57287e618cacb9d73a74ee348d.jpg",
+      "sourceName": "7f887e57287e618cacb9d73a74ee348d.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/7f887e57287e618cacb9d73a74ee348d.jpg",
+      "createdAt": "2026-06-28T11:49:02.883Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "7f887e57287e618cacb9d73a74ee348d.jpg: learn ocean rocks skyline backlight; action=cover mouth with sunglasses in wind; hands=one hand covers mouth while holding sunglasses, other hand relaxed; legs=standing long-leg line; slots=atmosphere/cover"
+    },
+    {
+      "sceneCategory": "rooftop pool sunny terrace",
+      "sceneKeywords": [
+        "rooftop pool",
+        "city view",
+        "blue sky",
+        "white terrace",
+        "sunny"
+      ],
+      "props": [],
+      "pose": "hand on hip sunny pool pose",
+      "bodyOrientation": "front standing with slight side angle",
+      "handPlacement": "one hand on hip, other relaxed behind or at side",
+      "legPose": "standing long-leg line near pool edge",
+      "propInteraction": "none",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "front",
+        "cover"
+      ],
+      "lighting": "hard midday rooftop sun",
+      "camera": "vertical mid-to-full body crop, slight low angle",
+      "composition": "pool edge and sky frame subject",
+      "mood": "confident pool terrace main shot",
+      "colorTone": "turquoise pool and clear sky",
+      "id": "style-095bdd05c8ae24a4",
+      "filename": "style-095bdd05c8ae24a4-6257525fedb6b8f6728ef1b09643346b.jpg",
+      "sourceName": "6257525fedb6b8f6728ef1b09643346b.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/6257525fedb6b8f6728ef1b09643346b.jpg",
+      "createdAt": "2026-06-28T11:49:02.882Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "6257525fedb6b8f6728ef1b09643346b.jpg: learn rooftop pool sunny terrace; action=hand on hip sunny pool pose; hands=one hand on hip, other relaxed behind or at side; legs=standing long-leg line near pool edge; slots=front/cover"
+    },
+    {
+      "sceneCategory": "seaside stone wall side pose",
+      "sceneKeywords": [
+        "stone seawall",
+        "ocean background",
+        "distant mountains",
+        "beach signage",
+        "side body"
+      ],
+      "props": [
+        "head scarf",
+        "small beach towel"
+      ],
+      "pose": "side body look back beside stone wall",
+      "bodyOrientation": "side profile / back three-quarter look back",
+      "handPlacement": "hands near waist or resting on towel",
+      "legPose": "side standing with hip line emphasized",
+      "propInteraction": "rest hand on towel or wall",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "side",
+        "atmosphere"
+      ],
+      "lighting": "soft seaside daylight",
+      "camera": "close vertical side crop",
+      "composition": "profile subject on right with open ocean behind",
+      "mood": "sweet beach side-view product mood",
+      "colorTone": "soft aqua and pale sky",
+      "id": "style-411e8b9942f73172",
+      "filename": "style-411e8b9942f73172-17816006654dde3b07d883a26154c39327bb4355e9.jpg",
+      "sourceName": "17816006654dde3b07d883a26154c39327bb4355e9.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/17816006654dde3b07d883a26154c39327bb4355e9.jpg",
+      "createdAt": "2026-06-28T11:49:02.882Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "17816006654dde3b07d883a26154c39327bb4355e9.jpg: learn seaside stone wall side pose; action=side body look back beside stone wall; hands=hands near waist or resting on towel; legs=side standing with hip line emphasized; slots=side/atmosphere"
+    },
+    {
+      "sceneCategory": "yacht deck luxury ocean",
+      "sceneKeywords": [
+        "yacht deck",
+        "white yacht body",
+        "champagne glass",
+        "open sea",
+        "metal rail"
+      ],
+      "props": [
+        "champagne glass",
+        "yacht rail"
+      ],
+      "pose": "lean on yacht rail holding champagne",
+      "bodyOrientation": "front three-quarter leaning pose",
+      "handPlacement": "one hand holds champagne glass, one hand rests on rail/hip",
+      "legPose": "leaning standing with hip shifted",
+      "propInteraction": "hold champagne glass",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "atmosphere",
+        "cover"
+      ],
+      "lighting": "direct yacht daylight with ocean reflection",
+      "camera": "horizontal or close editorial crop",
+      "composition": "yacht hull diagonal with sea horizon",
+      "mood": "premium vacation editorial",
+      "colorTone": "white yacht, blue sea, warm skin",
+      "id": "style-7a3ef4388b0c4142",
+      "filename": "style-7a3ef4388b0c4142-1777019813035ad405f224fefff0b2f42c7cd4a114_square.jpg",
+      "sourceName": "1777019813035ad405f224fefff0b2f42c7cd4a114_square.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/1777019813035ad405f224fefff0b2f42c7cd4a114_square.jpg",
+      "createdAt": "2026-06-28T11:49:02.882Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "1777019813035ad405f224fefff0b2f42c7cd4a114_square.jpg: learn yacht deck luxury ocean; action=lean on yacht rail holding champagne; hands=one hand holds champagne glass, one hand rests on rail/hip; legs=leaning standing with hip shifted; slots=atmosphere/cover"
+    },
+    {
+      "sceneCategory": "resort lounge under beach umbrella",
+      "sceneKeywords": [
+        "resort lounge",
+        "large white umbrella",
+        "rattan sofa",
+        "blue sky",
+        "casual vacation seating"
+      ],
+      "props": [
+        "umbrella",
+        "sofa cushion"
+      ],
+      "pose": "relaxed seated lounge pose",
+      "bodyOrientation": "front seated three-quarter, head turned aside",
+      "handPlacement": "one hand relaxed on cushion, one hand near lap",
+      "legPose": "seated bent legs with relaxed crossed angle",
+      "propInteraction": "lean on sofa cushion",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "atmosphere",
+        "cover"
+      ],
+      "lighting": "bright daylight with umbrella shade",
+      "camera": "close vertical social crop, seated upper body and legs",
+      "composition": "foreground cushion, umbrella canopy overhead, resort background depth",
+      "mood": "real casual resort diary",
+      "colorTone": "clear blue and white summer tone",
+      "id": "style-b7c903b5131fe0fd",
+      "filename": "style-b7c903b5131fe0fd-1776935397f4c3dd35349dc951888fbddbe4f9ec57_squfix.jpg",
+      "sourceName": "1776935397f4c3dd35349dc951888fbddbe4f9ec57_squfix.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/1776935397f4c3dd35349dc951888fbddbe4f9ec57_squfix.jpg",
+      "createdAt": "2026-06-28T11:49:02.881Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "1776935397f4c3dd35349dc951888fbddbe4f9ec57_squfix.jpg: learn resort lounge under beach umbrella; action=relaxed seated lounge pose; hands=one hand relaxed on cushion, one hand near lap; legs=seated bent legs with relaxed crossed angle; slots=atmosphere/cover"
+    },
+    {
+      "sceneCategory": "infinity pool sea overlook",
+      "sceneKeywords": [
+        "infinity pool edge",
+        "open ocean",
+        "high viewpoint",
+        "clear sky",
+        "beach below"
+      ],
+      "props": [],
+      "pose": "arms raised vacation pose",
+      "bodyOrientation": "front full body",
+      "handPlacement": "both arms raised overhead",
+      "legPose": "straight full-body standing at pool edge",
+      "propInteraction": "none",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "lifestyle",
+        "atmosphere"
+      ],
+      "lighting": "strong sunny ocean light",
+      "camera": "wide vertical full-body crop",
+      "composition": "small figure against expansive ocean and sky",
+      "mood": "energetic vacation check-in",
+      "colorTone": "deep blue ocean and sky",
+      "id": "style-14f06809dda561ed",
+      "filename": "style-14f06809dda561ed-16097304372a777fc97627975450c319.jpg",
+      "sourceName": "16097304372a777fc97627975450c319.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣搭配图集/16097304372a777fc97627975450c319.jpg",
+      "createdAt": "2026-06-28T11:49:02.880Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "16097304372a777fc97627975450c319.jpg: learn infinity pool sea overlook; action=arms raised vacation pose; hands=both arms raised overhead; legs=straight full-body standing at pool edge; slots=lifestyle/atmosphere"
+    },
+    {
+      "sceneCategory": "palm beach walk full-body",
+      "sceneKeywords": [
+        "palm beach",
+        "sand path",
+        "ocean side",
+        "walking shadow"
+      ],
+      "props": [
+        "straw hat",
+        "palm leaf"
+      ],
+      "pose": "beach walk holding hat and touching palm leaf",
+      "bodyOrientation": "front walking three-quarter looking aside",
+      "handPlacement": "one hand holds straw hat, one hand touches palm leaf",
+      "legPose": "walking step with one leg forward",
+      "propInteraction": "hold straw hat and touch palm leaf",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "lifestyle",
+        "cover"
+      ],
+      "lighting": "late afternoon palm beach sun",
+      "camera": "vertical full-body crop",
+      "composition": "palm trunks and beach curve behind subject",
+      "mood": "natural beach walking editorial",
+      "colorTone": "cream outfit, green palm, pale sand",
+      "id": "style-dee19287bde1a3a8",
+      "filename": "style-dee19287bde1a3a8-ScreenShot_2026-06-26_133353_983.png",
+      "sourceName": "ScreenShot_2026-06-26_133353_983.png",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣场景图/ScreenShot_2026-06-26_133353_983.png",
+      "createdAt": "2026-06-28T11:49:02.879Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "ScreenShot_2026-06-26_133353_983.png: learn palm beach walk full-body; action=beach walk holding hat and touching palm leaf; hands=one hand holds straw hat, one hand touches palm leaf; legs=walking step with one leg forward; slots=lifestyle/cover"
+    },
+    {
+      "sceneCategory": "beach umbrella drink moment",
+      "sceneKeywords": [
+        "blue beach umbrellas",
+        "sand beach",
+        "sea crowd",
+        "drink bottle"
+      ],
+      "props": [
+        "drink bottle"
+      ],
+      "pose": "drink bottle near lips",
+      "bodyOrientation": "front standing close crop",
+      "handPlacement": "one hand holds drink bottle to mouth, other arm relaxed",
+      "legPose": "standing close crop",
+      "propInteraction": "drink from bottle",
+      "garmentVisibilityRisk": "high",
+      "suitableSlots": [
+        "lifestyle",
+        "cover"
+      ],
+      "lighting": "hard beach daylight",
+      "camera": "close vertical torso crop",
+      "composition": "beach umbrellas and chairs behind subject",
+      "mood": "real crowded beach snapshot",
+      "colorTone": "blue umbrella and bright sand",
+      "id": "style-b51f1d2a300ec4cc",
+      "filename": "style-b51f1d2a300ec4cc-O1CN01xnTf8K1IbHx5eRqPO_!!2208255940911-0-cib.jpg",
+      "sourceName": "O1CN01xnTf8K1IbHx5eRqPO_!!2208255940911-0-cib.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣场景图/O1CN01xnTf8K1IbHx5eRqPO_!!2208255940911-0-cib.jpg",
+      "createdAt": "2026-06-28T11:49:02.879Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "O1CN01xnTf8K1IbHx5eRqPO_!!2208255940911-0-cib.jpg: learn beach umbrella drink moment; action=drink bottle near lips; hands=one hand holds drink bottle to mouth, other arm relaxed; legs=standing close crop; slots=lifestyle/cover"
+    },
+    {
+      "sceneCategory": "pool villa hand-shade main pose",
+      "sceneKeywords": [
+        "green pool",
+        "stone sculpture",
+        "villa garden",
+        "sunny"
+      ],
+      "props": [
+        "hairband"
+      ],
+      "pose": "hand shading sun above forehead",
+      "bodyOrientation": "front standing",
+      "handPlacement": "both hands near forehead shading sun",
+      "legPose": "one leg forward, main-image standing line",
+      "propInteraction": "hairband styling",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "cover",
+        "front"
+      ],
+      "lighting": "hard sunny pool light",
+      "camera": "horizontal or mid body crop",
+      "composition": "pool behind subject, hands framing face",
+      "mood": "sunny pool smile cover",
+      "colorTone": "green pool and cream swimwear",
+      "id": "style-c32bad7c1b47450b",
+      "filename": "style-c32bad7c1b47450b-O1CN01pHPD061D5c6YC1Hsy_!!2489090165-0-cib.jpg",
+      "sourceName": "O1CN01pHPD061D5c6YC1Hsy_!!2489090165-0-cib.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣场景图/O1CN01pHPD061D5c6YC1Hsy_!!2489090165-0-cib.jpg",
+      "createdAt": "2026-06-28T11:49:02.879Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "O1CN01pHPD061D5c6YC1Hsy_!!2489090165-0-cib.jpg: learn pool villa hand-shade main pose; action=hand shading sun above forehead; hands=both hands near forehead shading sun; legs=one leg forward, main-image standing line; slots=cover/front"
+    },
+    {
+      "sceneCategory": "cliff ocean wooden railing",
+      "sceneKeywords": [
+        "cliff viewpoint",
+        "wood railing",
+        "turquoise ocean",
+        "flower hair clip"
+      ],
+      "props": [
+        "flower hair clip"
+      ],
+      "pose": "lean on wooden railing front view",
+      "bodyOrientation": "front standing against rail",
+      "handPlacement": "both hands rest on railing",
+      "legPose": "crossed standing near railing",
+      "propInteraction": "lean on railing",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "front",
+        "atmosphere"
+      ],
+      "lighting": "bright high cliff daylight",
+      "camera": "square front crop",
+      "composition": "railing leads to cliff and ocean below",
+      "mood": "premium cliff vacation main shot",
+      "colorTone": "white outfit and turquoise sea",
+      "id": "style-c370487230a6966d",
+      "filename": "style-c370487230a6966d-O1CN01aGbdOy295NzlRDrBl_!!2222037428016-0-cib.jpg",
+      "sourceName": "O1CN01aGbdOy295NzlRDrBl_!!2222037428016-0-cib.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣场景图/O1CN01aGbdOy295NzlRDrBl_!!2222037428016-0-cib.jpg",
+      "createdAt": "2026-06-28T11:49:02.878Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "O1CN01aGbdOy295NzlRDrBl_!!2222037428016-0-cib.jpg: learn cliff ocean wooden railing; action=lean on wooden railing front view; hands=both hands rest on railing; legs=crossed standing near railing; slots=front/atmosphere"
+    },
+    {
+      "sceneCategory": "shallow crystal water rocks",
+      "sceneKeywords": [
+        "clear shallow water",
+        "black rocks",
+        "water splash",
+        "blue sky"
+      ],
+      "props": [],
+      "pose": "play with water splash",
+      "bodyOrientation": "front standing slight side",
+      "handPlacement": "both hands raised around water splash",
+      "legPose": "standing in shallow water",
+      "propInteraction": "splash water",
+      "garmentVisibilityRisk": "medium",
+      "suitableSlots": [
+        "lifestyle",
+        "atmosphere"
+      ],
+      "lighting": "bright water-reflection daylight",
+      "camera": "square mid body crop",
+      "composition": "clear water foreground and rocks behind",
+      "mood": "fresh playful water moment",
+      "colorTone": "pale aqua and white",
+      "id": "style-68a68ac545e68747",
+      "filename": "style-68a68ac545e68747-O1CN01ZRuVq61v0tRyJNbcE_!!956676111-0-cib.jpg",
+      "sourceName": "O1CN01ZRuVq61v0tRyJNbcE_!!956676111-0-cib.jpg",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣场景图/O1CN01ZRuVq61v0tRyJNbcE_!!956676111-0-cib.jpg",
+      "createdAt": "2026-06-28T11:49:02.878Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "O1CN01ZRuVq61v0tRyJNbcE_!!956676111-0-cib.jpg: learn shallow crystal water rocks; action=play with water splash; hands=both hands raised around water splash; legs=standing in shallow water; slots=lifestyle/atmosphere"
+    },
+    {
+      "sceneCategory": "sea-view balcony product crop",
+      "sceneKeywords": [
+        "glass balcony",
+        "sea view",
+        "blue water",
+        "window frame"
+      ],
+      "props": [],
+      "pose": "one hand out to side, hold skirt edge",
+      "bodyOrientation": "front product crop",
+      "handPlacement": "one hand holds garment edge, one hand extended near railing",
+      "legPose": "standing, legs mostly cropped",
+      "propInteraction": "none",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "front",
+        "side"
+      ],
+      "lighting": "soft balcony daylight",
+      "camera": "cropped torso-to-thigh product view",
+      "composition": "sea view through balcony window",
+      "mood": "clean product-detail lifestyle crop",
+      "colorTone": "white outfit and blue sea",
+      "id": "style-61de3bc7d61d4e0f",
+      "filename": "style-61de3bc7d61d4e0f-IMG_3508.jpg",
+      "sourceName": "IMG_3508.JPG",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣场景图/IMG_3508.JPG",
+      "createdAt": "2026-06-28T11:49:02.875Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "IMG_3508.JPG: learn sea-view balcony product crop; action=one hand out to side, hold skirt edge; hands=one hand holds garment edge, one hand extended near railing; legs=standing, legs mostly cropped; slots=front/side"
+    },
+    {
+      "sceneCategory": "flower garden straw hat cover",
+      "sceneKeywords": [
+        "flower garden",
+        "straw hat",
+        "red glasses",
+        "bougainvillea",
+        "dappled shade"
+      ],
+      "props": [
+        "straw hat",
+        "red glasses"
+      ],
+      "pose": "stand in flower garden with hat and glasses",
+      "bodyOrientation": "front standing slight side",
+      "handPlacement": "one hand relaxed, one hand holds small accessory",
+      "legPose": "standing cover crop",
+      "propInteraction": "wear straw hat and glasses",
+      "garmentVisibilityRisk": "low",
+      "suitableSlots": [
+        "cover",
+        "front"
+      ],
+      "lighting": "dappled garden sunlight",
+      "camera": "square waist-up cover crop",
+      "composition": "flowers fill background and side frame",
+      "mood": "sweet garden vacation cover",
+      "colorTone": "pink flowers and blue skirt",
+      "id": "style-1f5a0d70416daf05",
+      "filename": "style-1f5a0d70416daf05-IMG_3504.jpg",
+      "sourceName": "IMG_3504.JPG",
+      "sourcePath": "/Users/yanxingyu/Downloads/泳衣场景图/IMG_3504.JPG",
+      "createdAt": "2026-06-28T11:49:02.873Z",
+      "productTypes": [
+        "swimwear",
+        "vacation-wear",
+        "beachwear",
+        "dress",
+        "daily-fashion"
+      ],
+      "negativeTags": [
+        "learn no face identity",
+        "learn no exact garment",
+        "avoid readable text",
+        "avoid watermark/logo",
+        "avoid product redesign"
+      ],
+      "summary": "IMG_3504.JPG: learn flower garden straw hat cover; action=stand in flower garden with hat and glasses; hands=one hand relaxed, one hand holds small accessory; legs=standing cover crop; slots=cover/front"
+    }
+  ]
+}

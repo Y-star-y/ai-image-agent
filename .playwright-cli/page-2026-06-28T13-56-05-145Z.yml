@@ -1,0 +1,62 @@
+- main [ref=e2]:
+  - region "生成参数" [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: AI
+      - generic [ref=e6]:
+        - heading "AI AGENT" [level=1] [ref=e7]
+        - paragraph [ref=e8]: IMAGE OPS
+    - generic "图片上传" [ref=e9]:
+      - generic [ref=e10] [cursor=pointer]:
+        - button "商品正面 必传" [ref=e11]
+        - generic [ref=e12]: 商品正面
+        - generic [ref=e13]: 必传
+      - generic [ref=e14] [cursor=pointer]:
+        - button "商品反面 可选" [ref=e15]
+        - generic [ref=e16]: 商品反面
+        - generic [ref=e17]: 可选
+      - generic [ref=e18] [cursor=pointer]:
+        - button "侧面/细节 可选" [ref=e19]
+        - generic [ref=e20]: 侧面/细节
+        - generic [ref=e21]: 可选
+      - generic [ref=e22] [cursor=pointer]:
+        - button "模特 必传" [ref=e23]
+        - generic [ref=e24]: 模特
+        - generic [ref=e25]: 必传
+    - button "AI" [ref=e27] [cursor=pointer]
+  - region "生成结果" [ref=e28]:
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - heading "AI 套图矩阵" [level=2] [ref=e31]
+        - paragraph [ref=e32]: 等待上传商品图和模特
+      - button "下载导出" [disabled] [ref=e33]
+    - generic [ref=e34]:
+      - article [ref=e35]:
+        - generic [ref=e37]: 模特正面
+        - generic [ref=e38]:
+          - strong [ref=e39]: "01"
+          - generic [ref=e40]: 等待生成
+      - article [ref=e41]:
+        - generic [ref=e43]: 模特侧身
+        - generic [ref=e44]:
+          - strong [ref=e45]: "02"
+          - generic [ref=e46]: 等待生成
+      - article [ref=e47]:
+        - generic [ref=e49]: 生活场景
+        - generic [ref=e50]:
+          - strong [ref=e51]: "03"
+          - generic [ref=e52]: 等待生成
+      - article [ref=e53]:
+        - generic [ref=e55]: 氛围场景
+        - generic [ref=e56]:
+          - strong [ref=e57]: "04"
+          - generic [ref=e58]: 等待生成
+      - article [ref=e59]:
+        - generic [ref=e61]: 商品细节
+        - generic [ref=e62]:
+          - strong [ref=e63]: "05"
+          - generic [ref=e64]: 等待生成
+      - article [ref=e65]:
+        - generic [ref=e67]: 种草封面
+        - generic [ref=e68]:
+          - strong [ref=e69]: "06"
+          - generic [ref=e70]: 等待生成
