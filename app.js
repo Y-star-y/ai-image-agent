@@ -36,8 +36,10 @@ const liveStatus = {
   timer: null,
 };
 
+const productUploadSlots = new Set(["front", "back", "side"]);
+
 uploads.forEach((input) => {
-  input.addEventListener("change", () => {
+  input.addEventListener("change", async () => {
     const file = input.files?.[0];
     if (!file) return;
 
@@ -45,11 +47,47 @@ uploads.forEach((input) => {
     const preview = document.querySelector(`[data-preview="${slot}"]`);
     const card = document.querySelector(`[data-slot="${slot}"]`);
     const url = URL.createObjectURL(file);
+    const oldUpload = state.uploads[slot];
+    const processing = prepareUploadImage(slot, file);
 
-    state.uploads[slot] = { file, url };
+    if (oldUpload?.url?.startsWith("blob:")) {
+      URL.revokeObjectURL(oldUpload.url);
+    }
+
+    const upload = {
+      croppedFace: false,
+      dataUrl: null,
+      file,
+      name: file.name,
+      processing,
+      type: file.type,
+      url,
+    };
+    state.uploads[slot] = upload;
     preview.src = url;
     card.classList.add("has-image");
     updateStatus();
+
+    try {
+      const processed = await processing;
+      if (state.uploads[slot] !== upload) return;
+
+      upload.croppedFace = processed.croppedFace;
+      upload.dataUrl = processed.dataUrl;
+      upload.type = processed.type || upload.type;
+      upload.url = processed.dataUrl;
+      preview.src = processed.dataUrl;
+      URL.revokeObjectURL(url);
+
+      if (processed.croppedFace) {
+        setStatus(`${slotLabel(slot)}已裁掉脸部，仅保留脖子以下衣服`);
+      }
+    } catch (error) {
+      console.warn(error);
+      if (state.uploads[slot] === upload) {
+        setStatus(`${slotLabel(slot)}处理失败，请重新上传`, { stop: true });
+      }
+    }
   });
 });
 
@@ -774,10 +812,11 @@ async function buildGeneratePayload() {
   const images = {};
 
   for (const [slot, item] of Object.entries(state.uploads)) {
+    const dataUrl = await uploadDataUrlForPayload(slot, item);
     images[slot] = {
-      dataUrl: await fileToDataUrl(item.file),
-      name: item.file.name,
-      type: item.file.type,
+      dataUrl,
+      name: item.name || item.file.name,
+      type: item.type || item.file.type,
     };
   }
 
@@ -860,6 +899,143 @@ function cleanProviderText(message) {
     .replace(/Seedream/gi, "图片生成服务")
     .replace(/Ark/gi, "AI 服务")
     .trim();
+}
+
+async function uploadDataUrlForPayload(slot, item) {
+  if (item.dataUrl) return item.dataUrl;
+
+  const processed = item.processing
+    ? await item.processing
+    : await prepareUploadImage(slot, item.file);
+
+  item.croppedFace = processed.croppedFace;
+  item.dataUrl = processed.dataUrl;
+  item.type = processed.type || item.type || item.file.type;
+  return item.dataUrl;
+}
+
+async function prepareUploadImage(slot, file) {
+  const dataUrl = await fileToDataUrl(file);
+  if (!productUploadSlots.has(slot)) {
+    return {
+      croppedFace: false,
+      dataUrl,
+      type: file.type,
+    };
+  }
+
+  return cropProductReferenceFace(dataUrl);
+}
+
+async function cropProductReferenceFace(dataUrl) {
+  if (typeof window.FaceDetector !== "function" || typeof createImageBitmap !== "function") {
+    return {
+      croppedFace: false,
+      dataUrl,
+      type: mimeTypeForDataUrl(dataUrl),
+    };
+  }
+
+  let bitmap = null;
+  try {
+    const blob = await dataUrlToBlob(dataUrl);
+    bitmap = await createImageBitmap(blob);
+    const detector = new window.FaceDetector({
+      fastMode: true,
+      maxDetectedFaces: 5,
+    });
+    const faces = await detector.detect(bitmap);
+    const face = bestProductReferenceFace(faces, bitmap.width, bitmap.height);
+
+    if (!face) {
+      return {
+        croppedFace: false,
+        dataUrl,
+        type: mimeTypeForDataUrl(dataUrl),
+      };
+    }
+
+    const cropTop = cropTopForFace(face, bitmap.height);
+    const cropHeight = bitmap.height - cropTop;
+    if (cropTop <= 0 || cropHeight < bitmap.height * 0.45) {
+      return {
+        croppedFace: false,
+        dataUrl,
+        type: mimeTypeForDataUrl(dataUrl),
+      };
+    }
+
+    const canvas = document.createElement("canvas");
+    canvas.width = bitmap.width;
+    canvas.height = cropHeight;
+    const context = canvas.getContext("2d");
+    context.drawImage(
+      bitmap,
+      0,
+      cropTop,
+      bitmap.width,
+      cropHeight,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    return {
+      croppedFace: true,
+      dataUrl: canvas.toDataURL("image/jpeg", 0.9),
+      type: "image/jpeg",
+    };
+  } catch (error) {
+    console.warn(error);
+    return {
+      croppedFace: false,
+      dataUrl,
+      type: mimeTypeForDataUrl(dataUrl),
+    };
+  } finally {
+    bitmap?.close?.();
+  }
+}
+
+function bestProductReferenceFace(faces, width, height) {
+  const candidates = Array.from(faces || [])
+    .map((face) => face.boundingBox)
+    .filter((box) => {
+      if (!box) return false;
+      const faceWidth = box.width / width;
+      const faceHeight = box.height / height;
+      const centerY = (box.y + box.height / 2) / height;
+      return faceWidth >= 0.08 && faceHeight >= 0.08 && centerY <= 0.48;
+    })
+    .sort((left, right) => right.width * right.height - left.width * left.height);
+
+  return candidates[0] || null;
+}
+
+function cropTopForFace(face, imageHeight) {
+  const faceBottom = face.y + face.height;
+  const belowChin = faceBottom + face.height * 0.08;
+  return Math.round(Math.min(belowChin, imageHeight * 0.52));
+}
+
+async function dataUrlToBlob(dataUrl) {
+  const response = await fetch(dataUrl);
+  return response.blob();
+}
+
+function mimeTypeForDataUrl(dataUrl) {
+  const match = String(dataUrl || "").match(/^data:([^;,]+)/);
+  return match?.[1] || "image/jpeg";
+}
+
+function slotLabel(slot) {
+  return {
+    back: "商品反面",
+    face: "模特图",
+    front: "商品正面",
+    side: "侧面/细节",
+  }[slot] || "图片";
 }
 
 function fileToDataUrl(file) {
