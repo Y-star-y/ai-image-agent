@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Image Agent</title>
-    <link rel="stylesheet" href="./styles.css?v=reference-only-20260629-1" />
+    <link rel="stylesheet" href="./styles.css?v=dual-mode-20260630-1" />
   </head>
   <body>
     <main class="app-shell">
@@ -49,6 +49,16 @@
 
         <form class="prompt-form" id="promptForm">
           <div class="generate-controls">
+            <div class="mode-switch" role="radiogroup" aria-label="生成模式">
+              <label class="mode-option">
+                <input type="radio" name="analysisMode" value="reference" checked />
+                <span>极速</span>
+              </label>
+              <label class="mode-option">
+                <input type="radio" name="analysisMode" value="analysis" />
+                <span>精修</span>
+              </label>
+            </div>
             <button class="generate-button" type="submit">生成</button>
           </div>
         </form>
@@ -99,6 +109,6 @@
       <img alt="放大预览" id="previewImage" />
     </dialog>
 
-    <script src="./app.js?v=reference-only-20260629-1"></script>
+    <script src="./app.js?v=dual-mode-20260630-1"></script>
   </body>
 </html>

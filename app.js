@@ -7,6 +7,7 @@ const workflowLog = document.querySelector("#workflowLog");
 const previewDialog = document.querySelector("#previewDialog");
 const previewImage = document.querySelector("#previewImage");
 const closePreview = document.querySelector("#closePreview");
+const modeInputs = document.querySelectorAll('input[name="analysisMode"]');
 
 const imageTypes = [
   "模特正面",
@@ -101,7 +102,7 @@ promptForm.addEventListener("submit", async (event) => {
 
   startRunTracking();
   setLoadingCards();
-  setStatus("AI 正在按参考图准备生成", { live: true });
+  setStatus(selectedAnalysisMode() === "analysis" ? "AI 正在准备精修生成" : "AI 正在按参考图准备生成", { live: true });
   exportButton.disabled = true;
 
   try {
@@ -509,7 +510,7 @@ async function readGenerateStream(response) {
 
 function handleStreamEvent(event, progress) {
   if (event.type === "prompt_start") {
-    setWorkflowStatus("规划镜头", "编排套图场景", "active", {
+    setWorkflowStatus(event.stageLabel || "规划镜头", event.stageDetail || "编排套图场景", "active", {
       completed: progress.completed,
       failed: progress.failed,
       total: imageTypes.length,
@@ -821,11 +822,15 @@ async function buildGeneratePayload() {
   }
 
   const payload = {
-    analysisMode: "reference",
+    analysisMode: selectedAnalysisMode(),
     images,
   };
 
   return payload;
+}
+
+function selectedAnalysisMode() {
+  return Array.from(modeInputs).find((input) => input.checked)?.value || "reference";
 }
 
 function normalizeGeneratedImage(item, index) {

@@ -18,6 +18,13 @@ const doubaoAnalysisModel =
   process.env.DOUBAO_AGENT_MODEL ||
   "doubao-seed-2-1-pro-260628";
 const doubaoAnalysisTimeoutMs = Number(process.env.DOUBAO_ANALYSIS_TIMEOUT_MS || 90000);
+const doubaoPromptModel =
+  process.env.DOUBAO_PROMPT_MODEL ||
+  process.env.DOUBAO_AGENT_MODEL ||
+  doubaoAnalysisModel;
+const doubaoPromptTimeoutMs = Number(process.env.DOUBAO_PROMPT_TIMEOUT_MS || 90000);
+const doubaoPlanRequired = process.env.DOUBAO_PLAN_REQUIRED !== "false";
+const planFallbackOnError = process.env.PLAN_FALLBACK_ON_ERROR === "true";
 
 const imageTypes = [
   "模特正面",
@@ -32,19 +39,19 @@ const personTallModelVisualStandard =
   "人物图显高比例硬标准：所有人物图（第 1、2、3、4、6 张）必须统一呈现高挑修长的 167–170cm 职业模特视觉观感；这不是实际身高描述，只是出图视觉比例标准；通过可信偏修长头身比、自然连续长腿比例、偏高腰线、胯腰高度轻微低机位、50mm 自然透视、3:4 竖构图、全身或脚踝以上近全身、人物占画面高度约 86%-94% 共同控制显高感；头顶到脚踝/脚面必须形成完整纵向线条，膝盖到小腿不能被裁掉；不允许因为姿势、道具、栏杆、椅子、泳池边或构图导致压矮；若动作会显矮，必须改成站姿或长腿延展站姿；禁止头大、腿短、五五身、身材压缩、显矮、大腿中部截断、膝上截断、胸口以上大头构图、高机位俯拍、坐姿压缩、跪姿压缩、蹲姿、躺姿、过度拉伸、夸张小头超长腿和假人比例。";
 const tallPoseHardLock =
   "修长姿态硬锁：所有人物图先保证整体人高挑修长再执行动作；优先站姿、微侧站姿、回头站姿、一腿前伸站姿或靠站，不使用坐、跪、蹲、躺、蜷腿、盘腿、低矮塌腰姿势；如果场景里有椅子、栏杆、泳池边、台阶或甲板，只能轻扶或靠站，不能坐下或跪下；双腿必须形成可读的长线条，腰线偏高，小腿/脚踝尽量入镜，不能只露大腿。";
-const garmentClosureStructureLock =
-  "开衫/闭合结构硬锁：这件商品按商品参考图的开衫/罩衫外搭处理，不是可扣合衬衫或针织上衣；人物正面图必须画成 unbuttoned open-front cardigan，前襟从领口到下摆保持连续敞开，左右两片前片分开并露出中间身体/内搭/空气间隙，下摆左右角也分开；严禁把左右前片在胸口、腰部或下摆处连接；严禁新增纽扣、扣眼、拉链、暗扣、搭扣、绑带、系结、蝴蝶结、扣条、门襟白色竖条、中心闭合竖线、单颗扣或一排扣；no button placket, no vertical button band, no central white strip, no tied knot, no fastened front, no closed V-neck blouse, no closed center seam.";
+const garmentStructureConsistencyRule =
+  "商品结构一致性：领口、门襟/扣合/闭合状态、纽扣、拉链、绑带、系结、肩带、袖口、下摆和关键装饰必须以商品参考图实际存在状态为准；不要把商品固定理解成任何单一品类；参考图是扣合/闭合/套头就保持完整前身和闭合门襟，参考图是敞开外搭才保持敞开；参考图有扣/拉链/绑带就保留，参考图没有就不要新增；不得为了动作或构图改变真实结构。防开衫漂移：不要把闭合衬衫、扣合上衣、套头上衣或连体衣画成外搭式敞开；除非参考图明确存在从领口到下摆贯通的中间空隙，否则胸前和腹部不能露出一条连续皮肤/内搭空隙，不能把前身拆成左右两片。";
 
 const productDetailLayoutStandard =
   "商品细节版式标准：3:4 竖版主次宫格，左侧大主宫格占画面约 65%-70% 并完整展示商品全貌，右侧窄竖列放 4 个小宫格展示局部卖点，左下角可补 1 个叠加式小细节块但不能遮挡主商品；白色 gutters/分隔线清楚，浅米色或浅奶油色台面/背景，自然软光、真实阴影和布料质感。";
 const productDetailFullViewGuard =
-  "完整全貌要求：主宫格内必须完整保留商品上缘/肩带、领口/前襟/开口、胸前或主体结构、腰部/中段、袖口/下摆/裙摆、闭合结构状态和参考图里的关键装饰，不能裁切、不能只放大局部、不能让任何商品边缘出画。";
+  "完整全貌要求：主宫格内必须完整保留商品上缘/肩带、领口/门襟/闭合状态、胸前或主体结构、腰部/中段、袖口/下摆/裙摆、扣合/闭合结构状态和参考图里的关键装饰，不能裁切、不能只放大局部、不能让任何商品边缘出画。";
 const productDetailSmallCellsGuard =
-  "小宫格内容：右侧竖列和左下角补图展示面料纹理、图案/印花/波点、领口/前襟/开口、真实闭合结构状态、结构褶皱、层叠/边缘、腰部或中段结构、装饰细节和做工，所有细节以商品参考图实际存在为准。";
+  "小宫格内容：右侧竖列和左下角补图展示面料纹理、图案/印花/波点、领口/门襟/闭合状态、真实扣合结构状态、结构褶皱、层叠/边缘、腰部或中段结构、装饰细节和做工，所有细节以商品参考图实际存在为准。";
 const productDetailSmallCellsNoRepeatGuard =
   "小宫格去重与填充要求：右侧 4 个小宫格和左下角补图必须全部有真实商品内容，不能留白、不能空格、不能纯色块、不能虚化占位、不能重复裁切同一个局部；每个小宫格只展示一个不同卖点，至少覆盖面料纹理、图案/印花/波点、结构褶皱或层叠边缘、腰部/中段结构、装饰/做工中的 5 类不同细节；若某类细节在参考图中不存在，必须换成另一个真实存在且未使用过的商品细节，格内主体占该格约 75%-95%。";
 const productDetailBan =
-  "细节图禁用：无人物、无人脸、无身体、无手、无模特穿着展示、无人体模特、无新增纽扣/拉链/扣眼/绑带/闭合门襟/中心扣条/白色闭合竖线、无可读文字、无水印、无 Logo、无品牌标签、无随机商品；避免平均 2x3 宫格、死白底模板感、主图裁切和背景抢商品。";
+  "细节图禁用：无人物、无人脸、无身体、无手、无模特穿着展示、无人体模特、无参考图不存在的新增结构/闭合件/装饰、无可读文字、无水印、无 Logo、无品牌标签、无随机商品；避免平均 2x3 宫格、死白底模板感、主图裁切和背景抢商品。";
 
 const visualStandardLibrary = {
   modelStandard: {
@@ -252,6 +259,7 @@ async function generateSet(body) {
   logStep(requestId, "done");
 
   return {
+    analysis: publicGenerationAnalysis(plan),
     directorPlan: plan.directorPlan || [],
     analysisMode: plan.analysisMode,
     generatedAt,
@@ -261,8 +269,9 @@ async function generateSet(body) {
     scenes: plan.scenes,
     visualStandardLibrary: plan.visualStandardLibrary || publicVisualStandardLibrary(),
     modelTrace: {
-      analysis: "reference-only",
+      analysis: plan.modelTrace?.analysis || (plan.analysisMode === "analysis" ? doubaoAnalysisModel : "reference-only"),
       analysisMode: plan.analysisMode,
+      prompt: plan.modelTrace?.prompt || (plan.analysisMode === "analysis" ? doubaoPromptModel : "built-in"),
       planner: plan.mode || "visual-director-v1",
       seedream: process.env.ARK_IMAGE_MODEL || process.env.SEEDDREAM_MODEL,
     },
@@ -353,6 +362,7 @@ async function generateStream(body, res) {
     );
 
     const record = {
+      analysis: publicGenerationAnalysis(plan),
       analysisMode: plan.analysisMode,
       directorPlan: plan.directorPlan || [],
       errors: errors.filter(Boolean),
@@ -364,8 +374,9 @@ async function generateStream(body, res) {
       scenes: plan.scenes,
       visualStandardLibrary: plan.visualStandardLibrary || publicVisualStandardLibrary(),
       modelTrace: {
-        analysis: "reference-only",
+        analysis: plan.modelTrace?.analysis || (plan.analysisMode === "analysis" ? doubaoAnalysisModel : "reference-only"),
         analysisMode: plan.analysisMode,
+        prompt: plan.modelTrace?.prompt || (plan.analysisMode === "analysis" ? doubaoPromptModel : "built-in"),
         planner: plan.mode || "visual-director-v1",
         seedream: process.env.ARK_IMAGE_MODEL || process.env.SEEDDREAM_MODEL,
       },
@@ -516,6 +527,184 @@ async function analyzeStyleReferenceImage({ dataUrl, sourceName }) {
   return parseJsonBlock(data.choices?.[0]?.message?.content || "");
 }
 
+async function analyzeGenerationImages(images) {
+  const content = [
+    {
+      type: "text",
+      text: `你是日本电商服装图片分析师。请只根据我提供的参考图做视觉识别，不要编造看不见的细节。
+
+任务：
+1. 商品图只分析衣服本身：颜色、版型、材质、图案、领口、门襟/扣合/闭合状态、袖口、下摆、装饰、卖点和不可改动结构。
+2. 如果商品图中出现人物，只忽略人物身份和脸，只看脖子以下的衣服。
+3. 模特图只分析人脸身份、五官、发型、肤色、妆容、气质和体态，不继承模特图里的衣服或背景。
+4. 输出必须是严格 JSON，不要 markdown，不要解释。
+
+JSON 格式：
+{
+  "product_analysis": {
+    "category": "",
+    "style": "",
+    "color": "",
+    "pattern": "",
+    "material": "",
+    "silhouette": "",
+    "fit": "",
+    "neckline": "",
+    "closure_state": "",
+    "sleeve": "",
+    "hem": "",
+    "texture": "",
+    "trims": [],
+    "key_details": [],
+    "selling_points": [],
+    "non_negotiables": []
+  },
+  "model_analysis": {
+    "face": "",
+    "facial_features": "",
+    "hair": "",
+    "skin_tone": "",
+    "makeup": "",
+    "body": "",
+    "vibe": "",
+    "identity_lock": ""
+  }
+}`,
+    },
+  ];
+
+  addAnalysisImage(content, images.front, "商品正面图，必看衣服正面结构");
+  addAnalysisImage(content, images.back, "商品反面图，可补充背面结构");
+  addAnalysisImage(content, images.side, "侧面/细节图，可补充材质、细节和局部结构");
+  addAnalysisImage(content, images.face, "模特图，只用于人脸身份、发型、妆容和体态");
+
+  const data = await callArkChat({
+    model: doubaoAnalysisModel,
+    messages: [
+      {
+        role: "user",
+        content,
+      },
+    ],
+  }, doubaoAnalysisTimeoutMs);
+
+  const parsed = parseJsonBlock(data.choices?.[0]?.message?.content || "");
+  if (!hasGenerationAnalysisPayload(parsed)) {
+    throw new Error("AI 未返回有效的商品/模特分析 JSON");
+  }
+  const normalized = normalizeGenerationAnalysis(parsed, "analysis");
+  if (!normalized.product_analysis || !normalized.model_analysis) {
+    throw new Error("AI 未返回有效的商品/模特分析 JSON");
+  }
+  return normalized;
+}
+
+function hasGenerationAnalysisPayload(value) {
+  if (!value || typeof value !== "object") return false;
+  return Boolean(
+    value.product_analysis ||
+    value.productAnalysis ||
+    value.product ||
+    value.model_analysis ||
+    value.modelAnalysis ||
+    value.model
+  );
+}
+
+function addAnalysisImage(content, image, label) {
+  if (!image?.dataUrl) return;
+  content.push({ type: "text", text: label });
+  content.push(imageContent(image.dataUrl));
+}
+
+async function createDoubaoPromptPlan(analysis, directorPlan) {
+  const promptInput = {
+    imageTypes,
+    directorPlan: directorPlan.map((director, index) => ({
+      title: imageTypes[index],
+      camera: director.camera,
+      environment: director.environment,
+      expression: director.expression,
+      featureFocus: director.featureFocus,
+      lighting: director.lighting,
+      pose: director.pose,
+      purpose: director.purpose,
+      sceneFamily: director.sceneFamily,
+      visibilityGuard: director.visibilityGuard,
+    })),
+    model_analysis: analysis.model_analysis,
+    product_analysis: analysis.product_analysis,
+    standards: {
+      garmentStructureConsistencyRule,
+      personTallModelVisualStandard,
+      productDetailBan,
+      productDetailLayoutStandard,
+      productDetailSmallCellsNoRepeatGuard,
+      targetPlatform: "SHEIN Japan / Qoo10 JP / Rakuten / Little Red Book / Instagram",
+      visualDirection: "清爽真实日系电商，真实商业摄影，转化导向，同一模特同一商品系列感",
+    },
+  };
+
+  const data = await callArkChat({
+    model: doubaoPromptModel,
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: `你是 SHEIN 日本站电商图片 Prompt 总监。请基于输入的商品分析、模特分析和 6 张镜头导演方案，输出严格 JSON。
+
+硬性要求：
+1. prompts 必须正好 6 条，顺序固定为：${imageTypes.join("、")}。
+2. 每条人物图 Prompt 必须明确保留同一张脸、同一发型、同一肤色、同一体态，并使用商品分析里的真实颜色、版型、材质、结构和细节。
+3. 第 5 条“商品细节”必须是纯商品 SHEIN 日本站详情图：无人物、无人脸、无身体、无手，左大右小主次宫格，展示真实商品全貌和不同局部卖点。
+4. 不允许把商品强行改成开衫、衬衫、泳衣、裙装或其他固定品类；门襟、扣合、绑带、拉链、肩带、下摆等必须跟随商品分析和参考图。
+5. 输出只要 JSON，不要 markdown，不要解释。
+
+JSON 格式：
+{
+  "jp_market_strategy": {
+    "target_platform": "",
+    "visual_direction": "",
+    "customer_emotion": "",
+    "conversion_logic": "",
+    "avoid_style": []
+  },
+  "scenes": [
+    { "title": "模特正面", "jp_style": "", "setting": "", "pose": "", "purpose": "" }
+  ],
+  "prompts": ["prompt 1", "prompt 2", "prompt 3", "prompt 4", "prompt 5", "prompt 6"]
+}
+
+输入 JSON：
+${JSON.stringify(promptInput, null, 2)}`,
+          },
+        ],
+      },
+    ],
+  }, doubaoPromptTimeoutMs);
+
+  const parsed = parseJsonBlock(data.choices?.[0]?.message?.content || "");
+  return normalizeDoubaoPromptPlan(parsed);
+}
+
+function normalizeDoubaoPromptPlan(plan) {
+  const normalized = plan && typeof plan === "object" ? plan : {};
+  const prompts = Array.isArray(normalized.prompts)
+    ? normalized.prompts.map((prompt) => String(prompt || "").trim())
+    : [];
+  if (prompts.length < imageTypes.length || prompts.slice(0, imageTypes.length).some((prompt) => !prompt)) {
+    throw new Error("Prompt 模型未返回完整 6 条 SHEIN Prompt");
+  }
+
+  return {
+    jp_market_strategy: normalized.jp_market_strategy || {},
+    prompts: prompts.slice(0, imageTypes.length),
+    scenes: Array.isArray(normalized.scenes) ? normalized.scenes.slice(0, imageTypes.length) : [],
+  };
+}
+
 function ensureStyleLibraryDirs() {
   fs.mkdirSync(styleLibraryImageDir, { recursive: true });
 }
@@ -628,11 +817,21 @@ function extensionFromContentType(contentType = "") {
 
 async function createGenerationPlan(images, requestId, writeEvent = () => {}, options = {}) {
   const analysisMode = normalizeAnalysisMode(options.analysisMode);
+  if (analysisMode === "analysis") {
+    return createAnalyzedGenerationPlan(images, requestId, writeEvent, analysisMode);
+  }
+
+  return createFastGenerationPlan(requestId, writeEvent, analysisMode);
+}
+
+async function createFastGenerationPlan(requestId, writeEvent = () => {}, analysisMode = "reference") {
   const analysis = defaultGenerationAnalysis("reference-only");
 
   logStep(requestId, "visual-director:start");
   writeEvent({
     analysisMode,
+    stageDetail: "编排套图场景",
+    stageLabel: "规划镜头",
     message: "AI 正在按参考图生成视觉导演方案",
     type: "prompt_start",
   });
@@ -664,6 +863,80 @@ async function createGenerationPlan(images, requestId, writeEvent = () => {}, op
   return normalized;
 }
 
+async function createAnalyzedGenerationPlan(images, requestId, writeEvent = () => {}, analysisMode = "analysis") {
+  let analysis;
+  let promptPlan;
+  let directorPlan;
+
+  try {
+    logStep(requestId, "doubao-analysis:start");
+    writeEvent({
+      analysisMode,
+      stageDetail: "识别颜色、版型、材质、人脸和发型",
+      stageLabel: "分析精修",
+      message: "AI 正在识别商品和模特细节",
+      type: "prompt_start",
+    });
+    analysis = await analyzeGenerationImages(images);
+    logStep(requestId, "doubao-analysis:done");
+
+    directorPlan = createDirectorPlan(analysis, requestId, readStyleLibraryIndex());
+
+    logStep(requestId, "doubao-prompt:start");
+    writeEvent({
+      analysisMode,
+      stageDetail: "写入 SHEIN 日本站套图 Prompt",
+      stageLabel: "生成 Prompt",
+      message: "AI 正在生成 SHEIN 日本站 Prompt",
+      type: "prompt_start",
+    });
+    promptPlan = await createDoubaoPromptPlan(analysis, directorPlan);
+    logStep(requestId, "doubao-prompt:done");
+  } catch (error) {
+    logStep(requestId, `doubao-plan:error:${error.message}`);
+    if (doubaoPlanRequired || !planFallbackOnError) {
+      throw error;
+    }
+
+    writeEvent({
+      analysisMode: "reference",
+      stageDetail: "精修失败，改用极速模式",
+      stageLabel: "模式回退",
+      message: "AI 正在改用极速模式生成",
+      type: "prompt_start",
+    });
+    return createFastGenerationPlan(requestId, writeEvent, "reference");
+  }
+
+  const normalized = withReferencePromptRules({
+    ...promptPlan,
+    directorPlan,
+    model_analysis: analysis.model_analysis,
+    product_analysis: analysis.product_analysis,
+    visualStandardLibrary: publicVisualStandardLibrary(),
+  });
+  normalized.analysisMode = analysisMode;
+  normalized.mode = "doubao-analysis-prompt-v1";
+  normalized.modelTrace = {
+    analysis: doubaoAnalysisModel,
+    prompt: doubaoPromptModel,
+  };
+
+  writeEvent({
+    analysis: publicGenerationAnalysis(normalized),
+    analysisMode,
+    directorPlan: normalized.directorPlan || directorPlan,
+    jpMarketStrategy: normalized.jp_market_strategy || {},
+    message: "AI 正在带精修 Prompt 生成 6 张图片",
+    mode: normalized.mode,
+    prompts: normalized.prompts,
+    scenes: normalized.scenes,
+    visualStandardLibrary: normalized.visualStandardLibrary || publicVisualStandardLibrary(),
+    type: "prompt_done",
+  });
+  return normalized;
+}
+
 function createDirectorPlan(analysis, requestId = "", styleIndex = readStyleLibraryIndex()) {
   const product = analysis?.product_analysis || {};
   const features = productFeatureList(product);
@@ -681,7 +954,7 @@ function createDirectorPlan(analysis, requestId = "", styleIndex = readStyleLibr
   const slots = [
     {
       expression: visualStandardLibrary.expressionLibrary.softSmile,
-      featureFocus: ["正面轮廓", "前襟/开口/闭合结构", "领口/肩部结构", "袖口/下摆", ...features.slice(0, 3)],
+      featureFocus: ["正面轮廓", "领口/门襟/闭合状态", "肩部结构", "袖口/下摆", ...features.slice(0, 3)],
       purpose: "真实主图，提升点击和商品识别",
       qaFocus: ["identity", "bodyRatio", "garmentFront", "hands"],
       slot: "front",
@@ -690,7 +963,7 @@ function createDirectorPlan(analysis, requestId = "", styleIndex = readStyleLibr
     },
     {
       expression: visualStandardLibrary.expressionLibrary.lookingBack,
-      featureFocus: ["背面/侧面轮廓", "前襟边缘状态", "肩线/袖长", "下摆垂坠", ...features.slice(0, 3)],
+      featureFocus: ["背面/侧面轮廓", "门襟边缘/侧面结构状态", "肩线/袖长", "下摆垂坠", ...features.slice(0, 3)],
       purpose: "展示背面/侧面版型和腰部卖点",
       qaFocus: ["identity", "bodyRatio", "garmentBack", "hands"],
       slot: "side",
@@ -699,7 +972,7 @@ function createDirectorPlan(analysis, requestId = "", styleIndex = readStyleLibr
     },
     {
       expression: visualStandardLibrary.expressionLibrary.relaxed,
-      featureFocus: ["整体穿搭", "商品轮廓", "前襟/开口/闭合结构", "面料垂坠"],
+      featureFocus: ["整体穿搭", "商品轮廓", "门襟/扣合/闭合状态", "面料垂坠"],
       purpose: "稳定轻生活展示图，用简单真实场景制造购买欲，同时优先保证人物协调和商品清晰",
       qaFocus: ["identity", "bodyRatio", "scene", "backgroundMatch", "hands", "garment"],
       slot: "lifestyle",
@@ -708,7 +981,7 @@ function createDirectorPlan(analysis, requestId = "", styleIndex = readStyleLibr
     },
     {
       expression: visualStandardLibrary.expressionLibrary.closedEyes,
-      featureFocus: ["商品轮廓", "领口/前襟", "袖子/下摆", "面料透感/垂坠"],
+      featureFocus: ["商品轮廓", "领口/门襟", "袖子/下摆", "面料透感/垂坠"],
       purpose: "氛围种草图，提升整套图高级感",
       qaFocus: ["identity", "backgroundMatch", "photography", "hands", "series"],
       slot: "atmosphere",
@@ -718,7 +991,7 @@ function createDirectorPlan(analysis, requestId = "", styleIndex = readStyleLibr
     null,
     {
       expression: visualStandardLibrary.expressionLibrary.laugh,
-      featureFocus: ["正面卖点", "前襟/开口/闭合结构", "整体穿搭", "商品轮廓"],
+      featureFocus: ["正面卖点", "领口/门襟/闭合状态", "整体穿搭", "商品轮廓"],
       purpose: "种草封面，适合 Little Red Book、Instagram、Vacation Diary",
       qaFocus: ["identity", "cover", "hands", "garment", "series"],
       slot: "cover",
@@ -740,7 +1013,7 @@ function productDetailDirector(features = []) {
     camera: "structured ecommerce product-detail collage, left dominant main grid cell with complete full product view, right narrow vertical detail column, optional bottom-left inset detail cell, clean white gutters",
     environment: ["Left Dominant Main Product Cell", "Right Vertical Detail Column", "Bottom-left Detail Inset", "Cream Tonal Product Surface", "Clean Ecommerce Layout"],
     expression: "none",
-    featureFocus: Array.from(new Set(["商品全貌", "前襟/开口/闭合结构", "领口/肩部结构", "袖口/下摆", "面料纹理", "图案/印花/波点", "结构褶皱", "层叠/边缘", "关键装饰", "做工细节", ...features.slice(0, 4)])),
+    featureFocus: Array.from(new Set(["商品全貌", "领口/门襟/闭合状态", "肩部结构", "袖口/下摆", "面料纹理", "图案/印花/波点", "结构褶皱", "层叠/边缘", "关键装饰", "做工细节", ...features.slice(0, 4)])),
     lighting: "soft natural commercial light, accurate fabric texture, no human shadow, cream tonal surface, clean white gutters, natural soft product shadow, product remains dominant",
     pose: `无人物，主大次小。${productDetailLayoutStandard}${productDetailFullViewGuard}${productDetailSmallCellsGuard}${productDetailSmallCellsNoRepeatGuard}`,
     purpose: "商品细节卖点图，只服务商品理解",
@@ -1127,8 +1400,8 @@ function directorFromStyleCandidate(candidate, slot, productProfile) {
 }
 
 function visibilityGuardForSlot(slot, candidate) {
-  const base = `动作必须服从商品卖点露出，不能遮挡领口、前襟/开口/闭合结构、袖口、下摆、图案和关键装饰；如果手碰衣边，只能把左右前片轻轻分开展示，不能把衣服捏合、扣合或拉到中线。${garmentClosureStructureLock}${tallPoseHardLock}`;
-  if (slot.slot === "front") return `${base} 主图只允许低遮挡动作，手臂不能横挡胸口或腰线，胸前必须看到开衫连续敞开的中间空隙。`;
+  const base = `动作必须服从商品卖点露出，不能遮挡领口、门襟/扣合/闭合状态、袖口、下摆、图案和关键装饰；如果手碰衣边，只能轻扶或顺势展示，不能拉扯、遮盖或改变参考图里的开合/闭合状态。${garmentStructureConsistencyRule}${tallPoseHardLock}`;
+  if (slot.slot === "front") return `${base} 主图只允许低遮挡动作，手臂不能横挡胸口或腰线，胸前/腰部关键结构必须清楚。`;
   if (slot.slot === "side") return `${base} 侧身图必须露出背面/侧面轮廓、肩线、袖长和下摆状态。`;
   if (slot.slot === "lifestyle") return `${base} 图三稳定优先，只允许正面或微侧站姿、低动作、少道具或无道具；禁止行走大跨步、坐姿、跪姿、手机自拍、手持饮品/包/草帽遮挡商品。`;
   if (candidate.garmentVisibilityRisk === "high") return `${base} 本动作遮挡风险高，只允许作为氛围/封面情绪，商品主体仍要清楚。`;
@@ -1196,14 +1469,14 @@ function composeVisualDirectorPrompt(analysis, director, index) {
       "AI Visual Director 商品细节图。",
       "Scene Standard：Structured Product Detail Collage, Left Dominant Main Product Cell, Right Vertical Detail Column, Bottom-left Detail Inset, Clean White Gutters, Cream Tonal Product Surface。",
       `Product Reference Rule：${productOnlyAnalysisText(product)}。`,
-      `Garment Closure Hard Lock：${garmentClosureStructureLock}`,
+      `Garment Structure Consistency：${garmentStructureConsistencyRule}`,
       `Feature Visibility：${featureText}。`,
       `Detail Cell Plan：${cellPlan}。`,
       `Composition：主大次小。${productDetailLayoutStandard}${productDetailFullViewGuard}${productDetailSmallCellsGuard}${productDetailSmallCellsNoRepeatGuard}`,
       "Photography Standard：structured ecommerce product-detail collage, left dominant main product catalog view, right vertical macro detail cells, optional bottom-left inset cell, soft natural commercial light, accurate fabric texture, correct gravity, natural fabric drape, clean white gutters, cream-beige surface, soft product shadow。",
       "No Empty / No Duplicate Cells：every small detail cell must be filled with a different real product macro detail from the references; no blank cell, no placeholder, no repeated crop, no duplicated fabric patch, no empty white/cream block。",
       `Strict Ban：${productDetailBan}`,
-      "Product Consistency：100% follow product reference images for color, pattern, silhouette, material, edges, trims, opening/closure state and all key details; product-detail main cell must show the open cardigan front with separated panels, no button placket or closed center strip。",
+      "Product Consistency：100% follow product reference images for color, pattern, silhouette, material, edges, trims, opening/closure state and all key details; product-detail main cell must show the real product structure from the reference, without invented or removed closure details。",
     ].join("\n");
   }
 
@@ -1218,8 +1491,8 @@ function composeVisualDirectorPrompt(analysis, director, index) {
     `Lighting：${director.lighting}。`,
     `Camera：${director.camera}。`,
     `Product Reference Rule：${analysisText(product)}。`,
-    `Garment Closure Hard Lock：${garmentClosureStructureLock}`,
-    `Model Analysis：脸=${model.face || "以模特参考图为准"}；发型=${model.hair || "以模特参考图为准"}；体态=${model.body || "Slim Fashion Model"}；气质=${model.vibe || "自然真实"}。`,
+    `Garment Structure Consistency：${garmentStructureConsistencyRule}`,
+    `Model Analysis：脸=${model.face || "以模特参考图为准"}；五官=${model.facial_features || "以模特参考图为准"}；发型=${model.hair || "以模特参考图为准"}；肤色=${model.skin_tone || "以模特参考图为准"}；妆容=${model.makeup || "自然日系商业妆容"}；体态=${model.body || "Slim Fashion Model"}；气质=${model.vibe || "自然真实"}；身份锁定=${model.identity_lock || "同一张脸、同一发型、同一肤色、同一妆容"}。`,
     `Feature Visibility：动作不能遮挡核心卖点，必须露出 ${featureText}。`,
     `Reference Style Learning：${visualStandardLibrary.referenceStyleLibrary.mood}；从多场景胶囊学习，但本张只执行 Scene Standard，不要自动回到泳池模板。`,
     `Learned Scene Capsules：${visualStandardLibrary.referenceStyleLibrary.scenes.join("、")}。`,
@@ -1236,8 +1509,8 @@ function composeVisualDirectorPrompt(analysis, director, index) {
     "Environment Standard：same camera, same exposure, same light source, same color temperature, same shadow direction, same depth of field, natural contact shadow under feet/legs/body edges, environmental bounce reflection, background perspective aligned, subject naturally integrated into environment。",
     "Scene Realism Standard：real location details, correct perspective, environmental reflections, slight background imperfections, lived-in props, atmospheric depth; no CGI resort, no empty fake pool backdrop, no stock-photo background, no pasted subject, no cutout edge glow, no over-sharp subject pasted onto soft background。",
     "Scene Diversity Lock：do not reuse the same pool/hotel/beach background across images; this image must follow its own Scene Family and Scene Standard, with different architecture, prop, lighting time and camera distance from the other 5 images。",
-    "Product Consistency：100% follow product reference images for clothing only; do not redesign color, pattern, silhouette, fabric, trims, opening/closure state or details; the cardigan front must remain open and unfastened with separated left/right front panels。",
-    "Strict Ban：no face change, no body ratio drift, no short legs, no petite body, no big head, no 50/50 body ratio, no compressed body, no thigh crop, no knee-up crop, no half-body compression, no sitting, no kneeling, no squatting, no reclining, no folded legs, no high-angle shot that makes the model look short, no over-stretched body, no exaggerated tiny head, no mannequin-like body, no plastic skin, no cutout subject, no random clothes, no menwear, no sweatshirt, no knitwear, no unrelated dress, no added buttons, no added zipper, no button placket, no vertical button band, no central white strip, no tied knot, no closed front, no fastened cardigan, no closed V-neck blouse, no extra person, no readable text, no watermark, no logo, no brand text, no random signage letters。",
+    "Product Consistency：100% follow product reference images for clothing only; do not redesign color, pattern, silhouette, fabric, trims, opening/closure state or details; keep the real structure from the reference without forcing a different garment type。",
+    "Strict Ban：no face change, no body ratio drift, no short legs, no petite body, no big head, no 50/50 body ratio, no compressed body, no thigh crop, no knee-up crop, no half-body compression, no sitting, no kneeling, no squatting, no reclining, no folded legs, no high-angle shot that makes the model look short, no over-stretched body, no exaggerated tiny head, no mannequin-like body, no plastic skin, no cutout subject, no random clothes, no menwear, no sweatshirt, no knitwear, no unrelated dress, no invented closure or trim details, no missing reference closure or trim details, no extra person, no readable text, no watermark, no logo, no brand text, no random signage letters。",
   ].join("\n");
 }
 
@@ -1246,14 +1519,14 @@ function productFeatureList(product = {}) {
     ...(Array.isArray(product.selling_points) ? product.selling_points : []),
     ...(Array.isArray(product.key_details) ? product.key_details : []),
   ].filter(Boolean);
-  const defaults = ["商品轮廓", "前襟/开口/闭合结构", "领口/肩部结构", "袖口/下摆", "图案/印花", "结构褶皱", "层叠/边缘", "关键装饰", "面料垂坠"];
+  const defaults = ["商品轮廓", "领口/门襟/闭合状态", "肩部结构", "袖口/下摆", "图案/印花", "结构褶皱", "层叠/边缘", "关键装饰", "面料垂坠"];
   return Array.from(new Set([...details, ...defaults])).slice(0, 10);
 }
 
 function productDetailCellPlan(product = {}, features = []) {
   const candidates = productFeatureList(product).concat(features).filter(Boolean);
   const uniqueFeatures = Array.from(new Set(candidates)).slice(0, 8);
-  const fallbackCells = ["前襟/开口/闭合结构近拍", "面料纹理近拍", "领口/肩部或袖口近拍", "层叠/边缘近拍", "下摆或装饰做工近拍"];
+  const fallbackCells = ["领口/门襟/闭合状态近拍", "面料纹理近拍", "肩部或袖口近拍", "层叠/边缘近拍", "下摆或装饰做工近拍"];
   const cells = fallbackCells.map((fallback, index) => uniqueFeatures[index] || fallback);
   return [
     `右侧小格 1=${cells[0]}`,
@@ -1267,6 +1540,13 @@ function productDetailCellPlan(product = {}, features = []) {
 
 function publicVisualStandardLibrary() {
   return visualStandardLibrary;
+}
+
+function publicGenerationAnalysis(plan = {}) {
+  return {
+    model_analysis: plan.model_analysis || {},
+    product_analysis: plan.product_analysis || {},
+  };
 }
 
 async function generateOneImage({
@@ -1341,10 +1621,11 @@ async function generateSeedreamImage({ prompt, references, type }) {
 }
 
 function buildSeedreamRequestBody({ prompt, references, type }) {
+  const sanitizedPrompt = sanitizeLegacyGarmentPrompt(prompt);
   const body = {
     model: process.env.ARK_IMAGE_MODEL || process.env.SEEDDREAM_MODEL || "doubao-seedream-5-0-260128",
     output_format: process.env.SEEDDREAM_RESPONSE_FORMAT || "png",
-    prompt: `${referenceMapText(references)}\n出图类型：${type}\n最高优先级商品结构硬锁：${garmentClosureStructureLock}\n开衫错误修正：宁可让前襟开口更大，也绝不能生成扣上/系上/闭合/中心扣条/白色闭合竖线/一排扣。\n${prompt}`,
+    prompt: `${referenceMapText(references)}\n出图类型：${type}\n最高优先级商品结构一致性：${garmentStructureConsistencyRule}\n${sanitizedPrompt}`,
     size: normalizeSeedreamSize(process.env.SEEDDREAM_IMAGE_SIZE || "2k"),
     watermark: false,
   };
@@ -1354,6 +1635,32 @@ function buildSeedreamRequestBody({ prompt, references, type }) {
   }
 
   return body;
+}
+
+function sanitizeLegacyGarmentPrompt(prompt) {
+  let cleaned = String(prompt || "");
+  const legacyRules = [
+    /开衫\/闭合结构硬锁[^。\n]*(?:。|\n)?/g,
+    /服装结构硬锁：开衫[^。\n]*(?:。|\n)?/g,
+    /开衫错误修正[^。\n]*(?:。|\n)?/g,
+    /开衫画面优先级[^。\n]*(?:。|\n)?/g,
+    /开衫左右前片必须分开[^。\n]*(?:。|\n)?/g,
+    /开衫必须敞开且左右前片分离[^。\n]*(?:。|\n)?/g,
+    /左右前片必须分开[^。\n]*(?:。|\n)?/g,
+    /胸前到下摆有连续开口[^。\n]*(?:。|\n)?/g,
+    /宁可让前襟打开得更明显[^。\n]*(?:。|\n)?/g,
+    /Garment Closure Hard Lock[^。\n]*(?:。|\n)?/g,
+    /unbuttoned open-front cardigan[^。.\n]*(?:[。.]|\n)?/gi,
+    /the cardigan front must remain open[^。.\n]*(?:[。.]|\n)?/gi,
+    /open cardigan front with separated panels[^。.\n]*(?:[。.]|\n)?/gi,
+    /no button placket[^。.\n]*(?:[。.]|\n)?/gi,
+  ];
+
+  for (const rule of legacyRules) {
+    cleaned = cleaned.replace(rule, "");
+  }
+
+  return cleaned.replace(/\n{3,}/g, "\n\n").trim();
 }
 
 function normalizeSeedreamSize(value) {
@@ -1465,24 +1772,62 @@ function shouldUseReferenceImages() {
 }
 
 function normalizeAnalysisMode(value) {
+  const mode = String(value || "").trim().toLowerCase();
+  if (["analysis", "analyzed", "refine", "precision", "精修"].includes(mode)) return "analysis";
   return "reference";
+}
+
+function normalizeGenerationAnalysis(value, mode) {
+  const source = value && typeof value === "object" ? value : {};
+  const productSource = source.product_analysis || source.productAnalysis || source.product || {};
+  const modelSource = source.model_analysis || source.modelAnalysis || source.model || productSource.model || {};
+  return {
+    model_analysis: normalizeModelAnalysis(modelSource),
+    product_analysis: {
+      ...normalizeProductAnalysis(productSource),
+      mode,
+    },
+  };
+}
+
+function normalizeModelAnalysis(value) {
+  return {
+    body: stringOrDefault(value?.body, "以模特参考图为准"),
+    face: stringOrDefault(value?.face, "以模特参考图为准"),
+    facial_features: stringOrDefault(value?.facial_features || value?.facialFeatures, ""),
+    hair: stringOrDefault(value?.hair, "以模特参考图为准"),
+    identity_lock: stringOrDefault(value?.identity_lock || value?.identityLock, "同一张脸、同一发型、同一肤色、同一妆容"),
+    makeup: stringOrDefault(value?.makeup, "自然日系商业妆容"),
+    skin_tone: stringOrDefault(value?.skin_tone || value?.skinTone, "以模特参考图为准"),
+    vibe: stringOrDefault(value?.vibe, "自然真实日系电商模特"),
+  };
 }
 
 function normalizeProductAnalysis(value) {
   return {
     category: stringOrDefault(value?.category, "服装/泳衣"),
+    closure_state: stringOrDefault(value?.closure_state || value?.closureState, "以商品参考图为准"),
     color: stringOrDefault(value?.color, "以商品参考图为准"),
-    key_details: Array.isArray(value?.key_details) ? value.key_details.slice(0, 8) : ["以商品参考图细节为准"],
+    fit: stringOrDefault(value?.fit, "以商品参考图为准"),
+    hem: stringOrDefault(value?.hem, "以商品参考图为准"),
+    key_details: normalizeStringArray(value?.key_details || value?.keyDetails || value?.details).length
+      ? normalizeStringArray(value?.key_details || value?.keyDetails || value?.details)
+      : ["以商品参考图细节为准"],
     material: stringOrDefault(value?.material, "以商品参考图为准"),
     model: {
       face: stringOrDefault(value?.model?.face, "以模特参考图为准"),
       hair: stringOrDefault(value?.model?.hair, "以模特参考图为准"),
       vibe: stringOrDefault(value?.model?.vibe, "自然真实"),
     },
+    neckline: stringOrDefault(value?.neckline, "以商品参考图为准"),
+    non_negotiables: normalizeStringArray(value?.non_negotiables || value?.nonNegotiables),
     pattern: stringOrDefault(value?.pattern, "以商品参考图为准"),
     selling_points: normalizeStringArray(value?.selling_points || value?.sellingPoints),
     silhouette: stringOrDefault(value?.silhouette, "以商品参考图为准"),
+    sleeve: stringOrDefault(value?.sleeve, "以商品参考图为准"),
     style: stringOrDefault(value?.style, "电商场景氛围"),
+    texture: stringOrDefault(value?.texture, "以商品参考图为准"),
+    trims: normalizeStringArray(value?.trims),
   };
 }
 
@@ -1495,22 +1840,52 @@ function defaultProductAnalysis(mode) {
 
 function defaultGenerationAnalysis(mode) {
   return {
-    model_analysis: {
-      body: "以模特参考图为准",
-      face: "以模特参考图为准",
-      hair: "以模特参考图为准",
-      vibe: "自然真实日系电商模特",
-    },
+    model_analysis: normalizeModelAnalysis({}),
     product_analysis: defaultProductAnalysis(mode),
   };
 }
 
 function analysisText(analysis) {
-  return `不做颜色、材质、纹理、图案或品类推断；商品颜色、图案、版型、材质、边缘、装饰、前襟/开口/闭合结构和所有细节只以商品参考图实际画面为准；${garmentClosureStructureLock}模特脸和发型只以模特参考图为准。`;
+  const summary = productAnalysisText(analysis);
+  if (summary) {
+    return `${summary}；商品所有细节最终以商品参考图实际画面为准；${garmentStructureConsistencyRule}模特脸和发型只以模特参考图为准。`;
+  }
+  return `不做颜色、材质、纹理、图案或品类推断；商品颜色、图案、版型、材质、边缘、装饰、领口/门襟/扣合/闭合状态和所有细节只以商品参考图实际画面为准；${garmentStructureConsistencyRule}模特脸和发型只以模特参考图为准。`;
 }
 
 function productOnlyAnalysisText(analysis) {
-  return `不做颜色、材质、纹理、图案或品类推断；商品颜色、图案、版型、材质、边缘、装饰、前襟/开口/闭合结构和所有细节只以商品参考图实际画面为准；${garmentClosureStructureLock}`;
+  const summary = productAnalysisText(analysis);
+  if (summary) {
+    return `${summary}；商品所有细节最终以商品参考图实际画面为准；${garmentStructureConsistencyRule}`;
+  }
+  return `不做颜色、材质、纹理、图案或品类推断；商品颜色、图案、版型、材质、边缘、装饰、领口/门襟/扣合/闭合状态和所有细节只以商品参考图实际画面为准；${garmentStructureConsistencyRule}`;
+}
+
+function productAnalysisText(analysis = {}) {
+  if (!analysis || ["reference-only", "fallback"].includes(analysis.mode)) return "";
+  const details = [
+    `品类=${analysis.category || "以参考图为准"}`,
+    `风格=${analysis.style || "日系电商"}`,
+    `颜色=${analysis.color || "以参考图为准"}`,
+    `图案=${analysis.pattern || "以参考图为准"}`,
+    `材质=${analysis.material || "以参考图为准"}`,
+    `版型=${analysis.silhouette || "以参考图为准"}`,
+    `松紧=${analysis.fit || "以参考图为准"}`,
+    `领口=${analysis.neckline || "以参考图为准"}`,
+    `门襟/扣合/闭合状态=${analysis.closure_state || "以参考图为准"}`,
+    `袖口=${analysis.sleeve || "以参考图为准"}`,
+    `下摆=${analysis.hem || "以参考图为准"}`,
+    `纹理=${analysis.texture || "以参考图为准"}`,
+  ];
+  const arrays = [
+    ["装饰", analysis.trims],
+    ["关键细节", analysis.key_details],
+    ["卖点", analysis.selling_points],
+    ["不可改动点", analysis.non_negotiables],
+  ]
+    .filter(([, value]) => Array.isArray(value) && value.length)
+    .map(([label, value]) => `${label}=${value.join("、")}`);
+  return `商品分析：${details.concat(arrays).join("；")}`;
 }
 
 function withReferencePromptRules(plan) {
@@ -1525,7 +1900,7 @@ function withReferencePromptRules(plan) {
     return [
       referenceRule,
       banRule,
-      `服装结构硬锁：${garmentClosureStructureLock}`,
+      `服装结构一致性：${garmentStructureConsistencyRule}`,
       globalVisualStandardPrompt(index),
       promptGuardForIndex(index, normalized.directorPlan?.[index]),
       prompt || fallbackPrompt(index, normalized.product_analysis),
@@ -1538,7 +1913,7 @@ function globalVisualStandardPrompt(index) {
   if (index === 4) {
     return [
       "SHEIN 日本站细节图标准：纯商品展示，左大右小主次宫格，清爽真实，转化导向，主次分明。",
-      `服装结构硬锁：${garmentClosureStructureLock}`,
+      `服装结构一致性：${garmentStructureConsistencyRule}`,
       productDetailLayoutStandard,
       productDetailFullViewGuard,
       productDetailSmallCellsGuard,
@@ -1551,7 +1926,7 @@ function globalVisualStandardPrompt(index) {
     "Identity Lock：Same Person, Same Face, Same Hair, Same Makeup, Same Skin Tone, Same Height Visual Impression, Same Body Ratio, Same Photographer。",
     `Height Visual Standard：${personTallModelVisualStandard}`,
     `Tall Body Hard Lock：${tallPoseHardLock}`,
-    `Garment Closure Hard Lock：${garmentClosureStructureLock}`,
+    `Garment Structure Consistency：${garmentStructureConsistencyRule}`,
     "Model Standard：真实商业模特比例，167–170cm 职业模特的视觉观感，不是实际身高描述，只是出图视觉比例标准；自然高挑感，自然连续长腿但人体比例可信，腰线偏高，自然肩/腰/臀，允许轻微姿态不完美，六张身体比例稳定；禁止头大、腿短、五五身、身材压缩、显矮、大腿中部截断、膝上截断、胸口以上大头构图、高机位俯拍、坐姿压缩、跪姿压缩、蹲姿、躺姿、过度拉伸、夸张小头超长腿和假人比例。",
     "Human Anatomy Guard：2 hands, 2 arms, 2 legs, 2 eyes, natural fingers, no extra limbs, no third hand, no fused hands。",
     "Face Realism Standard：同一张脸，真实皮肤纹理，可见毛孔，轻微不对称，细小瑕疵，柔和眼下纹理，自然法令纹和唇纹，自然眼神，自然日系商业妆容。",
@@ -1563,7 +1938,7 @@ function globalVisualStandardPrompt(index) {
     `Prop Rule：每张最多 1-2 个生活道具，可选 ${visualStandardLibrary.referenceStyleLibrary.props.join("、")}；道具必须自然入镜，不能遮挡商品卖点。`,
     `Text/Watermark Ban：${visualStandardLibrary.referenceStyleLibrary.textBan}。`,
     "Scene Diversity Lock：6 张不能复用同一个泳池/酒店/海边背景；人物图尽量覆盖不同场景家族，如 studio/window、indoor room、cafe/street、garden、marina/ocean、pool/beach；每张必须有不同地点类别、建筑元素、道具、光线时间和景深。",
-    "商品卖点露出：动作不能挡住核心卖点；必须露出商品参考图中的正面轮廓、领口、前襟/开口/闭合结构、袖口/下摆、面料纹理、图案/装饰和真实垂坠；开衫/不可扣合款必须保持前襟敞开，左右前片分离，胸前到下摆有连续开口；手碰衣边时只能向外分开展示，不能把衣片合到一起。",
+    "商品卖点露出：动作不能挡住核心卖点；必须露出商品参考图中的正面轮廓、领口、门襟/扣合/闭合状态、袖口/下摆、面料纹理、图案/装饰和真实垂坠；商品开合/闭合状态必须跟随参考图；手碰衣边时只能轻扶或顺势展示，不能遮挡、拉扯或改变真实结构。",
     "Fabric Standard：natural fabric tension，correct gravity，real fabric drape，裙摆和褶皱符合真实重力。",
   ].join("\n");
 }
@@ -1580,18 +1955,18 @@ function promptGuardForIndex(index, director) {
       `Pose Source：${director.source || "style-pool"}；Pose=${director.pose || "natural pose"}。`,
       `Body Orientation：${director.bodyOrientation || "natural"}；Hand Placement：${director.handPlacement || "natural hands"}；Leg Pose：${director.legPose || "natural long-leg pose"}；Prop Interaction：${director.propInteraction || "none"}。`,
       `Tall Body Hard Lock：${tallPoseHardLock}`,
-      `Visibility Guard：${director.visibilityGuard || "动作不能遮挡商品卖点，领口、前襟/开口/闭合结构、袖口、下摆和图案必须清晰；左右前片必须分开，不能出现扣条或中心闭合竖线。"}。`,
+      `Visibility Guard：${director.visibilityGuard || "动作不能遮挡商品卖点，领口、门襟/扣合/闭合状态、袖口、下摆和图案必须清晰；商品开合/闭合状态必须按参考图呈现。"}。`,
       actionDiversityRule,
     ].join("\n");
   }
 
   const guards = [
-    `本张为主图：使用本轮动态抽样的真实电商场景，低遮挡正面或微侧站姿，胯腰高度轻微低机位，全身或脚踝以上近全身，脚踝/小腿尽量入镜，商品正面卖点无遮挡；领口、前襟/开口/闭合结构、袖口和下摆必须清楚；开衫左右前片必须分开，胸前到下摆有连续开口，绝不能出现扣条或中心白色闭合竖线。${garmentClosureStructureLock}${tallPoseHardLock}`,
-    `本张为侧身/背面版型图：使用本轮动态抽样的侧身、背面或回头站姿，展示背面/侧面轮廓、肩线、袖长、前襟边缘状态和下摆；避免大腿中部截断、膝上截断和半身压缩，保持真实商业模特比例。${garmentClosureStructureLock}${tallPoseHardLock}`,
-    `本张为生活场景图：稳定轻生活展示，优先咖啡店门口、窗边、码头栏杆、花园小径等简单真实场景；正面或微侧站姿，低动作、少道具或无道具，双手自然下垂或轻触衣摆边缘但不能把前片合拢；全身或脚踝以上近全身，小腿/脚踝尽量完整，人体比例可信，商品卖点无遮挡；禁止行走大跨步、手持饮品/包/草帽遮挡、坐姿、跪姿、蹲姿、躺姿和复杂互动。${garmentClosureStructureLock}${tallPoseHardLock}`,
-    `本张为氛围场景图：使用本轮动态抽样的光影、情绪和环境融合场景，只允许站姿、微侧站姿、回头站姿或轻靠站姿；可扶头发、拿墨镜、靠栏杆或自然回头；商品主体仍清楚，避免胸口以上大头构图、坐姿、跪姿、蹲姿、躺姿和半身压缩。${garmentClosureStructureLock}${tallPoseHardLock}`,
-    `本张为商品细节卖点图：纯商品左大右小主次宫格，不出现模特、不出现人脸、不出现人体、不出现手；${garmentClosureStructureLock}${productDetailLayoutStandard}${productDetailFullViewGuard}${productDetailSmallCellsGuard}${productDetailSmallCellsNoRepeatGuard}${productDetailBan}`,
-    `本张为种草封面图：使用本轮动态抽样的封面场景、封面动作和主道具，必须站姿近全身，整理头发、轻触衣摆边缘但不能合拢前片、hold bag low 或自然笑；不做普通半身、坐姿、跪姿、蹲姿、躺姿压矮构图。${garmentClosureStructureLock}${tallPoseHardLock}`,
+    `本张为主图：使用本轮动态抽样的真实电商场景，低遮挡正面或微侧站姿，胯腰高度轻微低机位，全身或脚踝以上近全身，脚踝/小腿尽量入镜，商品正面卖点无遮挡；领口、门襟/扣合/闭合状态、袖口和下摆必须清楚，商品开合状态按参考图呈现。${garmentStructureConsistencyRule}${tallPoseHardLock}`,
+    `本张为侧身/背面版型图：使用本轮动态抽样的侧身、背面或回头站姿，展示背面/侧面轮廓、肩线、袖长、门襟边缘/侧面结构状态和下摆；避免大腿中部截断、膝上截断和半身压缩，保持真实商业模特比例。${garmentStructureConsistencyRule}${tallPoseHardLock}`,
+    `本张为生活场景图：稳定轻生活展示，优先咖啡店门口、窗边、码头栏杆、花园小径等简单真实场景；正面或微侧站姿，低动作、少道具或无道具，双手自然下垂或轻触衣摆边缘但不能遮挡或改变开合结构；全身或脚踝以上近全身，小腿/脚踝尽量完整，人体比例可信，商品卖点无遮挡；禁止行走大跨步、手持饮品/包/草帽遮挡、坐姿、跪姿、蹲姿、躺姿和复杂互动。${garmentStructureConsistencyRule}${tallPoseHardLock}`,
+    `本张为氛围场景图：使用本轮动态抽样的光影、情绪和环境融合场景，只允许站姿、微侧站姿、回头站姿或轻靠站姿；可扶头发、拿墨镜、靠栏杆或自然回头；商品主体仍清楚，避免胸口以上大头构图、坐姿、跪姿、蹲姿、躺姿和半身压缩。${garmentStructureConsistencyRule}${tallPoseHardLock}`,
+    `本张为商品细节卖点图：纯商品左大右小主次宫格，不出现模特、不出现人脸、不出现人体、不出现手；${garmentStructureConsistencyRule}${productDetailLayoutStandard}${productDetailFullViewGuard}${productDetailSmallCellsGuard}${productDetailSmallCellsNoRepeatGuard}${productDetailBan}`,
+    `本张为种草封面图：使用本轮动态抽样的封面场景、封面动作和主道具，必须站姿近全身，整理头发、轻触衣摆边缘、hold bag low 或自然笑；不做普通半身、坐姿、跪姿、蹲姿、躺姿压矮构图。${garmentStructureConsistencyRule}${tallPoseHardLock}`,
   ];
   return guards[index] || "";
 }
@@ -1639,19 +2014,19 @@ function normalizePlan(plan) {
 
 function fallbackPrompt(index, analysis = defaultProductAnalysis("fallback")) {
   const scenes = [
-    "日系清爽棚拍、白墙 showroom 或民宿窗边自然光正面穿搭，模特自然站姿，全身或脚踝以上近全身，人物占画面高度 86%-94%，头顶到脚踝/脚面形成完整纵向线条，突出商品正面轮廓和上身效果；开衫左右前片必须分开，胸前到下摆有连续开口，不能出现扣条/中心闭合竖线，同时保持真实商业模特比例",
-    "日系侧身或背面版型展示，优先使用窗边白帘、白色走廊、花园门廊或海景阳台其中一个场景，模特微转身体，站姿回头，全身或脚踝以上近全身，人物占画面高度 86%-94%，强调背面/侧面轮廓、肩线、袖长、前襟边缘状态和下摆，避免大腿中部截断、膝上截断和半身压缩",
-    "日本夏日稳定轻生活场景，从海边小镇咖啡店门口、饮品店窗边、花园石径旁、码头栏杆旁、民宿窗边中任选一个，不固定泳池/露台，自然阳光；正面或微侧站姿，低动作、少道具或无道具，双手自然下垂或轻触衣摆边缘但不能合拢前片；全身或脚踝以上近全身，人物占画面高度 86%-94%，真实生活方式氛围，自然全身比例，禁止行走大跨步、坐姿、跪姿、蹲姿、躺姿、手持饮品/包/草帽遮挡商品",
-    "日系氛围场景图，从日落码头、风吹白帘室内、花墙门廊、礁石远景、棕榈花园中任选一个，站姿、微侧站姿、回头站姿或轻靠站姿近全身，人物占画面高度 86%-94%，强调光影、环境情绪和种草感，避免胸口以上大头构图、坐姿、跪姿、蹲姿、躺姿和半身压缩，商品领口、前襟/开口/闭合结构、袖口和下摆保持参考图状态",
-    `纯商品左大右小主次宫格卖点图，无人物、无人脸、无手、无身体；${garmentClosureStructureLock}${productDetailLayoutStandard}${productDetailFullViewGuard}${productDetailSmallCellsGuard}`,
-    "SNS/电商封面图，适合 Rakuten、Qoo10、Instagram 种草封面，必须站姿近全身，人物占画面高度 86%-94%，场景从花园门廊、海边咖啡露台、码头栏杆、白色更衣帘、阳光民宿房间中任选一个，开衫必须敞开且左右前片分离，画面清透有记忆点，禁止坐姿、跪姿、蹲姿、躺姿和半身压缩",
+    "日系清爽棚拍、白墙 showroom 或民宿窗边自然光正面穿搭，模特自然站姿，全身或脚踝以上近全身，人物占画面高度 86%-94%，头顶到脚踝/脚面形成完整纵向线条，突出商品正面轮廓、领口/门襟/闭合状态和上身效果，同时保持真实商业模特比例",
+    "日系侧身或背面版型展示，优先使用窗边白帘、白色走廊、花园门廊或海景阳台其中一个场景，模特微转身体，站姿回头，全身或脚踝以上近全身，人物占画面高度 86%-94%，强调背面/侧面轮廓、肩线、袖长、门襟边缘/侧面结构状态和下摆，避免大腿中部截断、膝上截断和半身压缩",
+    "日本夏日稳定轻生活场景，从海边小镇咖啡店门口、饮品店窗边、花园石径旁、码头栏杆旁、民宿窗边中任选一个，不固定泳池/露台，自然阳光；正面或微侧站姿，低动作、少道具或无道具，双手自然下垂或轻触衣摆边缘但不能遮挡或改变商品开合结构；全身或脚踝以上近全身，人物占画面高度 86%-94%，真实生活方式氛围，自然全身比例，禁止行走大跨步、坐姿、跪姿、蹲姿、躺姿、手持饮品/包/草帽遮挡商品",
+    "日系氛围场景图，从日落码头、风吹白帘室内、花墙门廊、礁石远景、棕榈花园中任选一个，站姿、微侧站姿、回头站姿或轻靠站姿近全身，人物占画面高度 86%-94%，强调光影、环境情绪和种草感，避免胸口以上大头构图、坐姿、跪姿、蹲姿、躺姿和半身压缩，商品领口、门襟/闭合状态、袖口和下摆保持参考图状态",
+    `纯商品左大右小主次宫格卖点图，无人物、无人脸、无手、无身体；${garmentStructureConsistencyRule}${productDetailLayoutStandard}${productDetailFullViewGuard}${productDetailSmallCellsGuard}`,
+    "SNS/电商封面图，适合 Rakuten、Qoo10、Instagram 种草封面，必须站姿近全身，人物占画面高度 86%-94%，场景从花园门廊、海边咖啡露台、码头栏杆、白色更衣帘、阳光民宿房间中任选一个，商品开合/闭合结构按参考图保持，画面清透有记忆点，禁止坐姿、跪姿、蹲姿、躺姿和半身压缩",
   ];
 
   if (index === 4) {
     return [
       "参考图规则：商品参考图只用于商品一致性；本张不使用模特身份，不需要人物出镜。",
       "SHEIN 日本站细节图标准：纯商品展示，左大右小主次宫格，清爽真实，转化导向，主次分明。",
-      `服装结构硬锁：${garmentClosureStructureLock}`,
+      `服装结构一致性：${garmentStructureConsistencyRule}`,
       productDetailLayoutStandard,
       productDetailFullViewGuard,
       productDetailSmallCellsGuard,
@@ -1664,9 +2039,9 @@ function fallbackPrompt(index, analysis = defaultProductAnalysis("fallback")) {
 
   return [
     "参考图规则：商品参考图只用于衣服，模特参考图只用于同一张脸和人物身份。",
-    "必须保持商品颜色、版型、图案、材质、边缘、前襟/开口/闭合结构和关键细节一致；必须保持模特脸、发型、五官比例和气质一致。",
-    `服装结构硬锁：${garmentClosureStructureLock}`,
-    "开衫画面优先级：宁可让前襟打开得更明显，也不能画成扣上、系上、闭合、单排扣、中心扣条或白色闭合竖线。",
+    "必须保持商品颜色、版型、图案、材质、边缘、领口/门襟/扣合/闭合状态和关键细节一致；必须保持模特脸、发型、五官比例和气质一致。",
+    `服装结构一致性：${garmentStructureConsistencyRule}`,
+    "商品结构优先级：不得强行改变参考图里的敞开、闭合、扣合、系结或装饰状态。",
     personTallModelVisualStandard,
     tallPoseHardLock,
     "人物图必须保持真实商业模特比例、自然高挑感、自然连续长腿但人体比例可信；相机胯腰高度轻微低机位但不夸张拉伸，人物占画面高度约 86%-94%，必须全身或脚踝以上近全身，脚踝/小腿尽量入镜，禁止只露大腿。",
